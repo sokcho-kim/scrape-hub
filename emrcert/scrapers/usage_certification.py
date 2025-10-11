@@ -200,13 +200,24 @@ class UsageCertificationScraper:
         try:
             rows = page.query_selector_all('div.table2 table tbody tr')
             for row in rows:
-                ths = row.query_selector_all('th')
-                tds = row.query_selector_all('td')
+                # 한 행에 th-td 쌍이 여러 개 있을 수 있음
+                # <th>key1</th><td>val1</td><th>key2</th><td>val2</td>
+                cells = row.query_selector_all('th, td')
 
-                for i in range(len(ths)):
-                    key = ths[i].inner_text().strip()
-                    value = tds[i].inner_text().strip() if i < len(tds) else ''
-                    data[key] = value
+                i = 0
+                while i < len(cells):
+                    # th 다음에 td가 와야 함
+                    if cells[i].evaluate('el => el.tagName') == 'TH':
+                        key = cells[i].inner_text().strip()
+                        # 다음 셀이 td인지 확인
+                        if i + 1 < len(cells) and cells[i + 1].evaluate('el => el.tagName') == 'TD':
+                            value = cells[i + 1].inner_text().strip()
+                            data[key] = value
+                            i += 2  # th-td 쌍 건너뛰기
+                        else:
+                            i += 1
+                    else:
+                        i += 1
 
         except Exception as e:
             logger.error(f"메인 테이블 파싱 실패: {e}")
