@@ -46,7 +46,7 @@ def main():
 
     print("\n" + "=" * 60)
     print("모든 크롤링 작업 완료!")
-    print("결과 파일 위치: ./data/ 폴더")
+    print("결과 파일 위치: ./data/emrcert/ 폴더")
     print("=" * 60)
 
 if __name__ == '__main__':

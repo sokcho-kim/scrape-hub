@@ -1,14 +1,14 @@
 from playwright.sync_api import sync_playwright, Page, TimeoutError
 import time
 from typing import List, Dict
-from ..utils.logger import setup_logger
-from ..utils.checkpoint import (
+from shared.utils.logger import setup_logger
+from shared.utils.checkpoint import (
     load_checkpoint, save_checkpoint, is_processed,
     add_processed, update_last_page
 )
-from ..utils.csv_handler import save_to_csv, remove_duplicates
+from shared.utils.csv_handler import save_to_csv, remove_duplicates
 
-logger = setup_logger('product_certification')
+logger = setup_logger('product_certification', project='emrcert')
 
 BASE_URL = 'https://emrcert.mohw.go.kr/certifiState/productCertifiStateList.es?mid=a10106010000'
 SAVE_INTERVAL = 10  # 10개마다 저장
@@ -18,7 +18,7 @@ PAGE_TIMEOUT = 30000
 class ProductCertificationScraper:
     def __init__(self, headless: bool = True):
         self.headless = headless
-        self.checkpoint = load_checkpoint()
+        self.checkpoint = load_checkpoint(project='emrcert')
         self.buffer_main = []  # 제품인증 메인 데이터 버퍼
         self.buffer_history = []  # 제품인증 이력 데이터 버퍼
         self.context = None  # Playwright context
@@ -59,14 +59,14 @@ class ProductCertificationScraper:
 
                     # 체크포인트 업데이트
                     update_last_page('product_cert', current_page, self.checkpoint)
-                    save_checkpoint(self.checkpoint)
+                    save_checkpoint(self.checkpoint, project='emrcert')
 
                 # 남은 버퍼 저장
                 self._flush_buffers()
 
                 # 중복 제거
-                remove_duplicates('product_certifications.csv', '인증번호')
-                remove_duplicates('product_certification_history.csv', '인증번호')
+                remove_duplicates('product_certifications.csv', '인증번호', project='emrcert')
+                remove_duplicates('product_certification_history.csv', '인증번호', project='emrcert')
 
                 logger.info("제품인증 크롤링 완료")
 
@@ -281,12 +281,12 @@ class ProductCertificationScraper:
     def _flush_buffers(self):
         """버퍼의 데이터를 CSV에 저장"""
         if self.buffer_main:
-            save_to_csv(self.buffer_main, 'product_certifications.csv')
+            save_to_csv(self.buffer_main, 'product_certifications.csv', project='emrcert')
             logger.info(f"{len(self.buffer_main)}개 메인 데이터 저장")
             self.buffer_main = []
 
         if self.buffer_history:
-            save_to_csv(self.buffer_history, 'product_certification_history.csv')
+            save_to_csv(self.buffer_history, 'product_certification_history.csv', project='emrcert')
             logger.info(f"{len(self.buffer_history)}개 이력 데이터 저장")
             self.buffer_history = []
 

@@ -69,7 +69,7 @@ python -m emrcert.scrapers.usage_certification
 
 ### 출력 파일
 
-`data/` 폴더에 다음 CSV 파일들이 생성됩니다:
+`data/emrcert/` 폴더에 다음 CSV 파일들이 생성됩니다:
 
 - `product_certifications.csv`: 제품인증 메인 정보 (~155개)
 - `product_certification_history.csv`: 제품인증 이력 정보
@@ -101,7 +101,7 @@ python -m emrcert.scrapers.usage_certification
 
 ### 체크포인트
 
-`checkpoint.json` 파일에 진행 상황이 저장됩니다.
+`checkpoint_emrcert.json` 파일에 진행 상황이 저장됩니다.
 처음부터 다시 시작하려면 이 파일을 삭제하세요.
 
 ```json
@@ -119,7 +119,7 @@ python -m emrcert.scrapers.usage_certification
 
 ### 로그
 
-`logs/` 폴더에 실행 로그가 저장됩니다.
+`logs/emrcert/` 폴더에 실행 로그가 저장됩니다.
 - 형식: `{scraper_name}_YYYYMMDD_HHMMSS.log`
 - 예시: `product_certification_20251013_090528.log`
 
@@ -127,7 +127,7 @@ python -m emrcert.scrapers.usage_certification
 
 `docs/` 폴더에 프로젝트 문서가 저장됩니다:
 - `docs/plans/emrcert.md`: EMR 크롤링 작업 계획서
-- `docs/journal/`: 작업 일지 및 버그 수정 기록
+- `docs/journal/emrcert/`: 작업 일지 및 버그 수정 기록
   - `2025-10-11_emrcert_bugfix.md`: HTML 테이블 파싱 버그 수정
   - `2025-10-13_emrcert_fullscrape.md`: 전체 데이터 재수집 작업
 
@@ -147,35 +147,40 @@ python -m emrcert.scrapers.usage_certification
 ```
 scrape-hub/
 ├── emrcert/                      # EMR 크롤러 패키지
-│   ├── scrapers/                 # 스크래퍼 모듈
-│   │   ├── product_certification.py    # 제품인증 크롤러
-│   │   └── usage_certification.py      # 사용인증 크롤러
+│   └── scrapers/                 # 스크래퍼 모듈
+│       ├── product_certification.py    # 제품인증 크롤러
+│       └── usage_certification.py      # 사용인증 크롤러
+│
+├── shared/                       # 공통 유틸리티
 │   └── utils/                    # 유틸리티 함수
-│       ├── logger.py             # 로깅 설정
+│       ├── logger.py             # 로깅 설정 (프로젝트별 경로 지원)
 │       ├── checkpoint.py         # 체크포인트 관리
 │       └── csv_handler.py        # CSV 저장/중복제거
 │
-├── data/                         # 수집된 데이터 (CSV)
-│   ├── product_certifications.csv
-│   ├── product_certification_history.csv
-│   ├── usage_certifications.csv
-│   └── usage_certification_history.csv
+├── data/                         # 수집된 데이터 (프로젝트별)
+│   ├── emrcert/                  # EMR 크롤러 데이터
+│   │   ├── product_certifications.csv
+│   │   ├── product_certification_history.csv
+│   │   ├── usage_certifications.csv
+│   │   └── usage_certification_history.csv
+│   └── hira_rulesvc/             # HIRA 규칙 서비스 데이터 (향후)
 │
-├── logs/                         # 실행 로그 (타임스탬프별)
+├── logs/                         # 실행 로그 (프로젝트별)
+│   ├── emrcert/                  # EMR 크롤러 로그
+│   └── hira_rulesvc/             # HIRA 규칙 서비스 로그 (향후)
 │
 ├── docs/                         # 📚 프로젝트 문서
 │   ├── plans/                    # 작업 계획서
 │   │   └── emrcert.md           # EMR 크롤링 계획
-│   ├── journal/                  # 작업 일지
-│   │   ├── README.md            # 작업 일지 목록
-│   │   ├── 2025-10-11_emrcert_bugfix.md
-│   │   └── 2025-10-13_emrcert_fullscrape.md
-│   ├── guides/                   # 사용 가이드 (향후)
-│   └── api/                      # API 문서 (향후)
+│   └── journal/                  # 작업 일지 (프로젝트별)
+│       ├── README.md            # 작업 일지 목록
+│       └── emrcert/             # EMR 크롤러 작업 일지
+│           ├── 2025-10-11_emrcert_bugfix.md
+│           └── 2025-10-13_emrcert_fullscrape.md
 │
 ├── main.py                       # 메인 실행 스크립트
 ├── requirements.txt              # 의존성 패키지
-├── checkpoint.json               # 크롤링 진행 상황
+├── checkpoint_emrcert.json       # EMR 크롤링 진행 상황
 └── README.md                     # 프로젝트 설명서
 ```
 
@@ -184,28 +189,32 @@ scrape-hub/
 ### 📦 `emrcert/`
 EMR 인증 크롤러의 핵심 코드가 있는 패키지입니다.
 - `scrapers/`: 각 인증 타입별 크롤러 구현
+
+### 🔧 `shared/`
+여러 프로젝트가 공유하는 유틸리티 모듈입니다.
 - `utils/`: 로깅, 체크포인트, CSV 처리 등 공통 유틸리티
+- 프로젝트별 경로를 지원하여 데이터와 로그를 분리 관리
 
 ### 💾 `data/`
-크롤링으로 수집된 CSV 데이터가 저장됩니다.
-- 10개 항목마다 자동 저장
-- 인증번호 기준 중복 제거
-- 총 4개 CSV 파일 (메인 + 이력)
+크롤링으로 수집된 CSV 데이터가 프로젝트별로 저장됩니다.
+- `emrcert/`: EMR 크롤러 데이터 (4개 CSV 파일)
+- `hira_rulesvc/`: HIRA 규칙 서비스 데이터 (향후)
+- 10개 항목마다 자동 저장, 인증번호 기준 중복 제거
 
 ### 📝 `logs/`
-실행 로그가 타임스탬프와 함께 저장됩니다.
+실행 로그가 프로젝트별로 타임스탬프와 함께 저장됩니다.
+- `emrcert/`: EMR 크롤러 로그
+- `hira_rulesvc/`: HIRA 규칙 서비스 로그 (향후)
 - 형식: `{scraper_name}_YYYYMMDD_HHMMSS.log`
 - 에러 및 진행 상황 추적 가능
 
 ### 📚 `docs/`
 프로젝트 관련 문서를 체계적으로 관리합니다.
 - `plans/`: 각 프로젝트의 작업 계획 및 요구사항
-- `journal/`: 작업 일지 및 버그 수정 기록
-- `guides/`: 사용 가이드 및 트러블슈팅 (향후)
-- `api/`: API 문서 및 모듈 레퍼런스 (향후)
+- `journal/`: 작업 일지 및 버그 수정 기록 (프로젝트별 하위 폴더)
 
-### 💾 `checkpoint.json`
-크롤링 진행 상황을 저장하여 중단 시 재시작을 지원합니다.
+### 💾 `checkpoint_emrcert.json`
+EMR 크롤링 진행 상황을 저장하여 중단 시 재시작을 지원합니다.
 - 마지막 처리 페이지 번호
 - 처리 완료된 인증번호 목록
 

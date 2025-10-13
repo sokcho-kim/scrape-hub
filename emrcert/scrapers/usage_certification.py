@@ -1,14 +1,14 @@
 from playwright.sync_api import sync_playwright, Page, TimeoutError
 import time
 from typing import List, Dict
-from ..utils.logger import setup_logger
-from ..utils.checkpoint import (
+from shared.utils.logger import setup_logger
+from shared.utils.checkpoint import (
     load_checkpoint, save_checkpoint, is_processed,
     add_processed, update_last_page
 )
-from ..utils.csv_handler import save_to_csv, remove_duplicates
+from shared.utils.csv_handler import save_to_csv, remove_duplicates
 
-logger = setup_logger('usage_certification')
+logger = setup_logger('usage_certification', project='emrcert')
 
 BASE_URL = 'https://emrcert.mohw.go.kr/certifiState/useCertifiStateList.es?mid=a10106020000'
 SAVE_INTERVAL = 10
@@ -18,7 +18,7 @@ PAGE_TIMEOUT = 30000
 class UsageCertificationScraper:
     def __init__(self, headless: bool = True):
         self.headless = headless
-        self.checkpoint = load_checkpoint()
+        self.checkpoint = load_checkpoint(project='emrcert')
         self.buffer_main = []
         self.buffer_history = []
         self.context = None
@@ -52,12 +52,12 @@ class UsageCertificationScraper:
                     self._process_list_page(page, current_page)
 
                     update_last_page('usage_cert', current_page, self.checkpoint)
-                    save_checkpoint(self.checkpoint)
+                    save_checkpoint(self.checkpoint, project='emrcert')
 
                 self._flush_buffers()
 
-                remove_duplicates('usage_certifications.csv', '인증번호')
-                remove_duplicates('usage_certification_history.csv', '인증번호')
+                remove_duplicates('usage_certifications.csv', '인증번호', project='emrcert')
+                remove_duplicates('usage_certification_history.csv', '인증번호', project='emrcert')
 
                 logger.info("사용인증 크롤링 완료")
 
@@ -253,12 +253,12 @@ class UsageCertificationScraper:
     def _flush_buffers(self):
         """버퍼의 데이터를 CSV에 저장"""
         if self.buffer_main:
-            save_to_csv(self.buffer_main, 'usage_certifications.csv')
+            save_to_csv(self.buffer_main, 'usage_certifications.csv', project='emrcert')
             logger.info(f"{len(self.buffer_main)}개 메인 데이터 저장")
             self.buffer_main = []
 
         if self.buffer_history:
-            save_to_csv(self.buffer_history, 'usage_certification_history.csv')
+            save_to_csv(self.buffer_history, 'usage_certification_history.csv', project='emrcert')
             logger.info(f"{len(self.buffer_history)}개 이력 데이터 저장")
             self.buffer_history = []
 

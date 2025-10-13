@@ -1,0 +1,976 @@
+<html><head><style>body {transition: opacity ease-in 0.2s; } 
+    body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
+    </style>
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script type="text/javascript" src="/lmxsrv/jquery-ui-1.8.14/jquery-1.5.1.js"></script>
+    <title>건강보험심사평가원 청구방법 및 급여기준 조회시스템</title>
+    <script type="text/javascript">
+    <!--		
+        $(function(){
+            $("a").bind("mousemove", function(){
+                window.status = " ";
+            });
+            $("a").bind("mousemover", function(){
+                window.status = " ";
+            });
+            $("a").bind("mouseoout", function(){
+                window.status = " ";
+            });
+        });
+    //-->
+    </script>
+    
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <link href="/lmxsrv/css/public.css" rel="stylesheet" type="text/css">
+    <link href="/lmxsrv/css/layout.css" rel="stylesheet" type="text/css">
+    <link href="/lmxsrv/css/main.css" rel="stylesheet" type="text/css">
+    
+    <script type="text/javascript" src="/lmxsrv/javascript/main.js"></script>
+    <script type="text/javascript" src="/lmxsrv/javascript/link.js"></script>
+    <script type="text/javascript" src="/lmxmng/javascript/link.js"></script>
+    <script type="text/javascript" src="/lmxmng/javascript/pageing.js"></script>
+    
+    <script src="/lmxsrv/jquery-ui-1.8.14/external/jquery.bgiframe-2.1.2.js"></script>
+    <script src="/lmxsrv/jquery-ui-1.8.14/ui/jquery.ui.core.js"></script>
+    <script src="/lmxsrv/jquery-ui-1.8.14/ui/jquery.ui.widget.js"></script>
+    <script src="/lmxsrv/jquery-ui-1.8.14/ui/jquery.ui.mouse.js"></script>
+    <script src="/lmxsrv/jquery-ui-1.8.14/ui/jquery.ui.draggable.js"></script>
+    <script src="/lmxsrv/jquery-ui-1.8.14/ui/jquery.ui.position.js"></script>
+    <script src="/lmxsrv/jquery-ui-1.8.14/ui/jquery.ui.resizable.js"></script>
+    <script src="/lmxsrv/jquery-ui-1.8.14/ui/jquery.ui.dialog.js"></script>
+    <link rel="stylesheet" href="/lmxsrv/jquery-ui-1.8.14/css/custom-theme/jquery-ui-1.8.13.custom.css">
+    
+    <script type="text/javascript">
+    function menu_go(v){
+        var tree01 = document.getElementById("tree01");
+        var contentbody = document.getElementById("contentbody");
+    
+         //고시 정보
+        if(v=='1'){
+            $("#LAWGROUP").val(1);
+            $("#tabTit").attr("src", "/lmxsrv/images/left/left_tit.gif");
+            tree01.src="/lmxsrv/law/lawTree.srv?LAWGROUP=1&MODE=srvlist";		
+            contentbody.src="/lmxsrv/law/lawListManager.srv?LAWGROUP=1";				
+        }
+        //서식정보
+        else if(v=='2'){
+            $("#tabTit").attr("src", "/lmxsrv/images/left/left_tit2.gif");
+            contentbody.src="/lmxsrv/attach/attachList.srv";		
+        }
+    }
+    
+    function resizeHeight() {
+        var url = document.getElementById("contentbody").contentWindow.document.URL;
+        
+        if(url.indexOf("/submain.srv") == -1)
+        {	
+            var the_height = document.getElementById("contentbody").contentWindow.document.body.scrollHeight;
+            //고시 트리 높이
+            var main_height = document.getElementById("tabTree").scrollHeight;
+            var height = the_height;
+            
+            if (main_height > the_height)
+                height = main_height;
+            
+            //height = height+5;
+            
+            $("#contentbody").css("height", height);
+        }
+    }
+    
+    $(function(){
+        $("#contentbody").bind("load", function(event){
+            processingClose();
+            resizeHeight();		
+        });
+    });
+    
+    function lawSearchMain(){
+        if($("#searchText").val().split(" ").join("").length == 0)
+            alert("검색어를 입력해 주세요!");
+        else
+        {		
+            //검색어 등록
+            $("#SEARCH_TEXT").val( $("#searchText").val() );
+            
+            //고시 검색
+            if($("#documentType").val() == 'law')
+            {
+                $("#seachForm").attr("action", "/lmxsrv/search/lawSerach.srv");
+                $("#SEARCH_TYPE").val( $("#searchTypeLaw").val() );
+                
+                if( $("#searchTypeLaw").val() == 'CONTENTS' ){
+                    if(confirm("고시내용 검색시 경우에 따라 수행시간이 오래걸릴 수 있습니다. 계속하시겠습니까?"))
+                    {
+                        $("#seachForm").submit();
+                        processing();
+                    }
+                }
+                else
+                {
+                    $("#seachForm").submit();
+                    processing();
+                }
+            }
+            //서식 검색
+            else
+            {
+                var seq = $("#lawSeq").val();
+                var attachType = 0;
+                
+                $("#seachForm").attr("action", "/lmxsrv/attach/attachList.srv");
+                //$("#SEARCH_TYPE").val( $("#searchTypeAttach").val() );
+                $("#SEARCH_TYPE").val( "all" );
+                
+                if(seq == '0')
+                    attachType = $("#attachType1").val();
+                else if(seq == '2')
+                    attachType = $("#attachType2").val();
+                else if(seq == '3')
+                    attachType = $("#attachType3").val();
+            
+                $("#SEQ_ATTACH_TYPE").val( attachType );
+                $("#SEQ").val( seq );			
+                $("#seachForm").submit();
+                processing();
+            }		
+        }
+    }
+    
+    function abcSearch(){
+        var document_type = $("#documentType").val();
+        $("#contentbody").attr("src", "/lmxsrv/search/abcLawSerach.srv?DOCUMENT_TYPE="+document_type);	
+    }
+    
+    function dateSearch(){
+        var document_type = $("#documentType").val();
+        $("#contentbody").attr("src", "/lmxsrv/search/dateLawSerach.srv?DOCUMENT_TYPE="+document_type);
+    }
+    
+    function changeDocumentType(){
+        if( $("#documentType").val() == 'law' )
+        {
+            $("#searchTypeLaw").show();
+            $("#searchTypeAttach").hide();
+            $("#lawSeq").hide();
+            $("#attachType").hide();
+        }
+        else
+        {
+            $("#searchTypeLaw").hide();
+            $("#searchTypeAttach").show();
+            $("#lawSeq").show();
+            $("#attachType").show();
+        }
+    }
+    
+    function thisChangeLawSeq(){
+        var seq = $("#lawSeq").val();
+        if(seq == '1'){
+            $("#attachType1").show();
+            $("#attachType2").hide();
+            $("#attachType3").hide();
+        }
+        else if(seq == '2'){
+            $("#attachType1").hide();
+            $("#attachType2").show();
+            $("#attachType3").hide();
+        }
+        else if(seq == '3'){
+            $("#attachType1").hide();
+            $("#attachType2").hide();
+            $("#attachType3").show();
+        }
+    }
+    </script>
+    </head>
+    
+    <body>
+        <!-- 통합검색 폼 -->
+        <form id="seachForm" method="post" target="contentbody">
+            <input type="hidden" name="SEQ" id="SEQ">		
+            <input type="hidden" name="SEQ_ATTACH_TYPE" id="SEQ_ATTACH_TYPE">
+            <input type="hidden" name="SEARCH_TEXT" id="SEARCH_TEXT">
+            <input type="hidden" name="SEARCH_TYPE" id="SEARCH_TYPE">
+        </form>
+        
+        <!-- 처리 메시지 -->
+        <div class="demo" style="display: none;">
+            <div id="dialog-modal" title="청구방법 조회시스템" style="text-align: center;">
+                <p>
+                    <br>처리 중 입니다. 잠시만 기다려 주세요.
+                </p>
+            </div>
+        </div>
+        <!--// 처리 메시지 -->
+        <!-- 스킵네비게이션 시작-->
+        <div id="accessibility">
+            <ul>
+                <li><a href="#main_menu">주메뉴 바로가기</a></li>
+                <li><a href="#content">콘텐츠 바로가기</a></li>
+            </ul>
+        </div>
+        <!-- 스킵네비게이션 끝-->
+        <hr>
+    
+        <div id="mainlayout">
+            <div id="wrap">
+                <!--상단 레이아웃 박스 시작-->
+                <div id="header">
+                    <div id="header_inner">
+                        <h1 id="logo">
+                            <a href="/lmxsrv/main/main.srv" target="_top"><img src="/lmxsrv/images/inc/logo.gif" width="283" height="46" alt="건강보험심사평가원 청구방법 조회시스템 로고" title="건강보험심사평가원 청구방법 조회시스템 로고">
+                            </a>
+                        </h1>
+                        <div id="top_menu">
+                            <ul>
+                                <li class="tmenu01"><a href="/lmxsrv/main/main.srv" target="_top">홈으로</a>
+                                </li>
+                                <li class="tmenu_li"></li>
+                                <li class="tmenu02"><a href="http://www.hira.or.kr/" target="_blank">건강보험심사평가원</a></li>
+                                <li class="tmenu_li"></li>
+                                <li class="tmenu02"><a href="http://biz.hira.or.kr/" target="_blank">요양기관 업무포털서비스</a></li>
+                                <li class="tmenu_li"></li>
+                                <li class="tmenu01"><a href="http://rulemgnt.hira.or.kr/lmxmng/main/main.srv" target="_top">관리자홈</a></li>
+                            </ul>
+                        </div>
+                        <hr>
+                        <a name="mainmenu"></a>
+    
+                        <h2 class="skip">주메뉴</h2>
+                        <div id="main_menu">
+                            <ul>
+                                <li class="mmenu01"><a href="javascript:menu_go('1');" title="고시정보"> </a><span class="vline"></span></li>
+                                <li class="mmenu02"><a href="javascript:menu_go('2');" title="서식정보"> </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--상단 레이아웃 박스 끝-->
+                <hr>
+                <a name="content"></a>
+                <!--중간 레이아웃 박스 시작-->
+    
+                <!--고시검색 시작-->
+                <div id="search">
+                    <div id="search_inner">
+                        <p class="txt_srch">
+                            <img src="/lmxsrv/images/inc/search.png" alt="서식통합검색" title="서식통합검색">
+                        </p><p>
+                        </p><ul class="sbt01">
+                            <li>
+                                <a href="javascript:abcSearch();">
+                                    <img src="/lmxsrv/images/btn/bt_srch1.gif" alt="가나다검색" title="가나다검색">
+                                </a>
+                            </li>
+                            <li><img src="/lmxsrv/images/btn/bt_srch2.gif" alt="고시일검색" title="고시일검색" onclick="dateSearch();" style="cursor: pointer;">
+                            </li>
+                        </ul>
+                        
+                        <p class="search_form">
+                            <label for="wtip"></label>
+                            <!-- <select name="documentType" id="documentType" onchange="changeDocumentType();">
+                                <option value="attach">서식</option>
+                                <option value="law">조문</option>
+                            </select> -->
+                            <input type="hidden" name="documentType" id="documentType" value="attach">
+                            <label for="format"></label>
+                            <select name="lawSeq" id="lawSeq" onchange="thisChangeLawSeq();" style="width: 250px;">
+                                <option value="0">전체 고시/세부작성요령</option>
+                                
+                                    <option value="176">
+                                        
+                                        급여비용의 부담
+                                    </option>
+                                
+                                    <option value="184">
+                                        
+                                        급여비용의 청구
+                                    </option>
+                                
+                                    <option value="194">
+                                        
+                                        세월호 사고 관련
+                                    </option>
+                                
+                                    <option value="160">
+                                        
+                                        시설수용자
+                                    </option>
+                                
+                                    <option value="2">
+                                        
+                                        요양급여비용 청구방법(보건복지부 고시)
+                                    </option>
+                                
+                                    <option value="12">
+                                        
+                                        요양급여비용심사청구소프트웨어의검사등에관한기준
+                                    </option>
+                                
+                                    <option value="137">
+                                        
+                                        의료급여법
+                                    </option>
+                                
+                                    <option value="111">
+                                        
+                                        의료급여법 시행규칙
+                                    </option>
+                                
+                                    <option value="96">
+                                        
+                                        의료급여수가의 기준 및 일반기준
+                                    </option>
+                                
+                                    <option value="170">
+                                        
+                                        의료급여의 범위
+                                    </option>
+                                
+                                    <option value="165">
+                                        
+                                        의료급여의 절차
+                                    </option>
+                                
+                                    <option value="204">
+                                        
+                                        자동차보험진료수가 심사업무처리에 관한 규정
+                                    </option>
+                                
+                                    <option value="189">
+                                        
+                                        정신질환자
+                                    </option>
+                                
+                                    <option value="215">
+                                        
+                                        코로나바이러스감염증-19관련
+                                    </option>
+                                
+                                    <option value="185">
+                                        
+                                        급여비용의 정산
+                                    </option>
+                                
+                                    <option value="161">
+                                        
+                                        무연고자 등
+                                    </option>
+                                
+                                    <option value="195">
+                                        
+                                        영상수가 인하고시 소송결과 관련
+                                    </option>
+                                
+                                    <option value="166">
+                                        
+                                        왕진 관련
+                                    </option>
+                                
+                                    <option value="200">
+                                        
+                                        요양급여비용 청구방법(세부사항)
+                                    </option>
+                                
+                                    <option value="171">
+                                        
+                                        의료급여 일반기준
+                                    </option>
+                                
+                                    <option value="112">
+                                        
+                                        의료급여법 시행령
+                                    </option>
+                                
+                                    <option value="99">
+                                        
+                                        임신,출산 진료비 등의 의료급여기준 및 방법
+                                    </option>
+                                
+                                    <option value="205">
+                                        
+                                        자동차보험진료수가 심사업무처리에 관한 규정(세부사항)
+                                    </option>
+                                
+                                    <option value="190">
+                                        
+                                        정신과 인력차등제 관련
+                                    </option>
+                                
+                                    <option value="181">
+                                        
+                                        직접 조제
+                                    </option>
+                                
+                                    <option value="186">
+                                        
+                                        대지급금 제도
+                                    </option>
+                                
+                                    <option value="180">
+                                        
+                                        사회복지시설(촉탁의 등) 관련
+                                    </option>
+                                
+                                    <option value="196">
+                                        
+                                        선별급여 관련
+                                    </option>
+                                
+                                    <option value="182">
+                                        
+                                        식대
+                                    </option>
+                                
+                                    <option value="3">
+                                        
+                                        요양급여비용 청구방법(세부작성요령)
+                                    </option>
+                                
+                                    <option value="97">
+                                        
+                                        요양비의 의료급여기준 및 방법
+                                    </option>
+                                
+                                    <option value="9">
+                                        
+                                        자동차보험진료수가 청구방법(세부작성요령)
+                                    </option>
+                                
+                                    <option value="162">
+                                        
+                                        행려환자
+                                    </option>
+                                
+                                    <option value="191">
+                                        
+                                        혈액투석 환자
+                                    </option>
+                                
+                                    <option value="167">
+                                        
+                                        회송
+                                    </option>
+                                
+                                    <option value="192">
+                                        
+                                        경증질환 약제비 본인부담 차등제
+                                    </option>
+                                
+                                    <option value="163">
+                                        
+                                        노숙인
+                                    </option>
+                                
+                                    <option value="197">
+                                        
+                                        메르스(MERS) 관련
+                                    </option>
+                                
+                                    <option value="187">
+                                        
+                                        부당이득금
+                                    </option>
+                                
+                                    <option value="168">
+                                        
+                                        선택의료급여기관
+                                    </option>
+                                
+                                    <option value="100">
+                                        
+                                        의료급여기관 간 동일성분 의약품 중복투약 관리에 관한 기준
+                                    </option>
+                                
+                                    <option value="172">
+                                        
+                                        중증질환 관련
+                                    </option>
+                                
+                                    <option value="98">
+                                        
+                                        선택의료급여기관 적용 대상자 및 이용 절차 등에 관한 규정
+                                    </option>
+                                
+                                    <option value="198">
+                                        
+                                        응급의료수가 관련
+                                    </option>
+                                
+                                    <option value="199">
+                                        
+                                        의료급여 본인부담 정리
+                                    </option>
+                                
+                                    <option value="164">
+                                        
+                                        의료급여 자격
+                                    </option>
+                                
+                                    <option value="173">
+                                        
+                                        희귀난치성 질환 관련
+                                    </option>
+                                
+                                    <option value="174">
+                                        
+                                        산정특례 관련
+                                    </option>
+                                
+                                    <option value="101">
+                                        
+                                        진통,진양,수렴,소염제인 외용제제
+                                    </option>
+                                
+                                    <option value="177">
+                                        
+                                        노인 틀니
+                                    </option>
+                                
+                                    <option value="206">
+                                        
+                                        코로나바이러스감염증-19 의료급여 절차 예외 인정기준
+                                    </option>
+                                
+                                    <option value="207">
+                                        
+                                        업무정지처분에 갈음한 과징금 적용기준
+                                    </option>
+                                
+                                    <option value="178">
+                                        
+                                        치과 임플란트
+                                    </option>
+                                
+                                    <option value="208">
+                                        
+                                        급여비용의 예탁 및 지급에 관한 규정
+                                    </option>
+                                
+                                    <option value="179">
+                                        
+                                        치석 제거
+                                    </option>
+                                
+                                    <option value="209">
+                                        
+                                        수급권자의 건강유지 및 증진 등을 위한 사업의 지원에 관한 기준
+                                    </option>
+                                
+                                    <option value="210">
+                                        
+                                        노숙인진료시설 지정 등에 관한 고시
+                                    </option>
+                                
+                                    <option value="211">
+                                        
+                                        근로능력평가의 기준 등에 관한 규정
+                                    </option>
+                                
+                                    <option value="216">
+                                        
+                                        의료급여 대상 여부의 확인 방법 및 절차 등에 관한 기준
+                                    </option>
+                                
+                            </select>
+                            <select name="attachType" id="attachType1">
+                                <option value="0">종류</option>
+                                
+                                    
+                                        <option value="2">별표</option>
+                                    
+                                
+                                    
+                                        <option value="3">별지</option>
+                                    
+                                
+                                    
+                                        <option value="4">별첨</option>
+                                    
+                                
+                                    
+                                        <option value="5">붙임</option>
+                                    
+                                
+                                    
+                                        <option value="6">세부작성요령</option>
+                                    
+                                
+                                    
+                                
+                            </select>
+                            <select name="attachType" id="attachType2" style="display: none;">
+                                <option value="0">종류</option>
+                                
+                                    
+                                        <option value="2">별표</option>
+                                    
+                                
+                                    
+                                        <option value="3">별지</option>
+                                    
+                                
+                                    
+                                        <option value="4">별첨</option>
+                                    
+                                
+                                    
+                                        <option value="5">붙임</option>
+                                    
+                                
+                                    
+                                
+                                    
+                                
+                            </select>
+                            <select name="attachType" id="attachType3" style="display: none;">
+                                <option value="0">종류</option>
+                                
+                                    
+                                
+                                    
+                                        <option value="3">별지</option>
+                                    
+                                
+                                    
+                                
+                                    
+                                
+                                    
+                                        <option value="6">세부작성요령</option>
+                                    
+                                
+                                    
+                                
+                            </select>
+                            <!-- <select name="searchType" id="searchTypeAttach">
+                                <option value="all">전체</option>
+                                <option value="title">제목</option>
+                                <option value="name">파일명</option>
+                                <option value="content">내용</option>
+                            </select> -->
+                            <select name="searchType" id="searchTypeLaw" style="display: none;">							
+                                <option value="LAWNAME">제목</option>
+                                <option value="CONTENTS">내용</option>
+                            </select>
+                            <label for="keywords"></label>
+                            <input type="text" name="searchText" id="searchText" size="30" maxlength="150">
+                            <script type="text/javascript">
+                                $('#searchText').keyup( function(event){
+                                    if (event.keyCode == 13)
+                                        lawSearchMain();
+                                });
+                            </script>
+                        </p>
+                        
+                        <p class="bt_search">
+                            <img src="/lmxsrv/images/btn/bt_search.gif" alt="검색" title="검색" onclick="lawSearchMain();" style="cursor: pointer;">
+                        </p>
+                    </div>
+                </div>
+                <!--고시검색 끝-->
+    
+                <div id="mainBody">
+                    <div id="mainBody_inner">
+                        <!--좌측 탭-->
+                        <div id="tabTree">
+                            <p class="leftTit">
+                                <img src="/lmxsrv/images/left/left_tit.gif" alt="고시정보" title="고시정보" name="tabTit" id="tabTit">
+                            </p>
+    
+                            <div class="tabtitBox">
+                                <div>
+                                    <p>
+                                        <img src="/lmxsrv/images/left/tab.gif" alt="분야별검색" title="분야별검색" width="228" height="20">
+                                    </p>
+                                </div>
+                                <div class="tabBox">
+                                    <div class="tabBox_inner">
+                                        <!-- 고시트리 -->
+                                        <iframe width="100%" class="theight" id="tree01" name="tree01" src="/lmxsrv/law/lawTree.srv?LAWGROUP=1&amp;MODE=srvlist" scrolling="auto" frameborder="0"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!--내용 시작-->
+                        <div id="content">
+                            <iframe class="dheight" width="100%" id="contentbody" name="contentbody" src="/lmxsrv/law/lawListManager.srv?SEQ=4" frameborder="0" scrolling="no" style="height: 468px;"></iframe>
+                        </div>
+                        <!--내용 끝-->
+                    </div>
+                </div>
+                <!--중간 레이아웃 박스 끝-->
+                <hr>
+    
+                <!--하단 시작-->
+                <div id="footer">
+                    <p>
+                        <img src="/lmxsrv/images/inc/footer_logo.gif" width="558" height="28" border="0" alt="강원도 원주시 혁신로 60(반곡동) 건강보험심사평가원 (우 26465) 고객센터 ARS안내 1644-2000 
+    COPYRIGHTS ⓒ 2012 BY HEALTH INSURANCE REVIEW &amp; ASSESSMENT SERVICE. ALL RIGHTS RESERVED. " title="강원도 원주시 혁신로 60(반곡동) 건강보험심사평가원 (우 26465) 고객센터 ARS안내 1644-2000 
+    COPYRIGHTS ⓒ 2012 BY HEALTH INSURANCE REVIEW &amp; ASSESSMENT SERVICE. ALL RIGHTS RESERVED.">
+                        
+                        <a href="http://www.hira.or.kr/" target="_blank">
+                            <img src="/lmxsrv/images/btn/icon_consult.png" style="margin-left: 10px;">
+                        </a>
+                    </p>
+                </div>
+                <!--하단 끝-->
+            </div>
+        </div>
+    
+        <script type="text/javascript" src="/lmxsrv/javascript/dotline.js"></script>
+        
+    
+    
+    <div id="screenity-ui"><div class="screenity-shadow-dom"><div><div class="screenity-scrollbar"></div><div class="screenity-scrollbar"></div></div><style type="text/css">
+                #screenity-ui, #screenity-ui div {
+                    background-color: unset;
+                    padding: unset;
+                    width: unset;
+                    box-shadow: unset;
+                    display: unset;
+                    margin: unset;
+                    border-radius: unset;
+                }
+                .screenity-outline {
+                    position: absolute;
+                    z-index: 99999999999;
+                    border: 2px solid #3080F8;
+                    outline-offset: -2px;
+                    pointer-events: none;
+                    border-radius: 5px!important;
+                }
+            .screenity-blur {
+                filter: blur(10px)!important;
+            }
+                .screenity-shadow-dom * {
+                    transition: unset;
+                }
+                .screenity-shadow-dom .TooltipContent {
+      border-radius: 30px!important;
+        background-color: #29292F!important;
+      padding: 10px 15px!important;
+      font-size: 12px;
+        margin-bottom: 10px!important;
+        bottom: 100px;
+      line-height: 1;
+        font-family: 'Satoshi-Medium', sans-serif;
+        z-index: 99999999!important;
+      color: #FFF;
+      box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px!important;
+      user-select: none;
+        transition: opacity 0.3 ease-in-out;
+      will-change: transform, opacity;
+        animation-duration: 400ms;
+      animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
+    }
+    
+    .screenity-shadow-dom .hide-tooltip {
+        display: none!important;
+    }
+    
+    .screenity-shadow-dom .tooltip-tall {
+        margin-bottom: 20px;
+    }
+    
+    .screenity-shadow-dom .tooltip-small {
+        margin-bottom: 5px;
+    }
+    
+    .screenity-shadow-dom .TooltipContent[data-state='delayed-open'][data-side='top'] {
+        animation-name: slideDownAndFade;
+    }
+    .screenity-shadow-dom .TooltipContent[data-state='delayed-open'][data-side='right'] {
+      animation-name: slideLeftAndFade;
+    }
+    .screenity-shadow-dom.TooltipContent[data-state='delayed-open'][data-side='bottom'] {
+      animation-name: slideUpAndFade;
+    }
+    .screenity-shadow-dom.TooltipContent[data-state='delayed-open'][data-side='left'] {
+      animation-name: slideRightAndFade;
+    }
+    
+    @keyframes slideUpAndFade {
+      from {
+        opacity: 0;
+        transform: translateY(2px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes slideRightAndFade {
+      from {
+        opacity: 0;
+        transform: translateX(-2px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes slideDownAndFade {
+      from {
+        opacity: 0;
+        transform: translateY(-2px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes slideLeftAndFade {
+      from {
+        opacity: 0;
+        transform: translateX(2px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    #screenity-ui [data-radix-popper-content-wrapper] { z-index: 999999999999!important; } 
+    
+    .screenity-shadow-dom .CanvasContainer {
+        position: fixed;
+        pointer-events: all!important;
+        top: 0px!important;
+        left: 0px!important;
+        z-index: 99999999999!important;
+    }
+    .screenity-shadow-dom .canvas {
+        position: fixed;
+        top: 0px!important;
+        left: 0px!important;
+        z-index: 99999999999!important;
+        background: transparent!important;
+    }
+    .screenity-shadow-dom .canvas-container {
+        top: 0px!important;
+        left: 0px!important;
+        z-index: 99999999999;
+        position: fixed!important;
+        background: transparent!important;
+    }
+    
+    .ScreenityDropdownMenuContent {
+        z-index: 99999999999!important;
+      min-width: 200px;
+      background-color: white;
+      margin-top: 4px;
+      margin-right: 8px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      border-radius: 15px;
+      z-index: 99999;
+      font-family: 'Satoshi-Medium', sans-serif;
+      color: #29292F;
+      box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35),
+        0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+      animation-duration: 400ms;
+      animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
+    }
+    .ScreenityDropdownMenuContent[data-side="top"] {
+      animation-name: slideDownAndFade;
+    }
+    .ScreenityDropdownMenuContent[data-side="right"] {
+      animation-name: slideLeftAndFade;
+    }
+    .ScreenityDropdownMenuContent[data-side="bottom"] {
+      animation-name: slideUpAndFade;
+    }
+    .ScreenityDropdownMenuContent[data-side="left"] {
+      animation-name: slideRightAndFade;
+    }
+    .ScreenityItemIndicator {
+      position: absolute;
+      right: 12px; 
+      width: 18px;
+      height: 18px;
+      background: #3080F8;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ScreenityDropdownMenuItem,
+    .ScreenityDropdownMenuRadioItem {
+      font-size: 14px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      height: 40px;
+      padding: 0 5px;
+      position: relative;
+      padding-left: 22px;
+      padding-right: 22px;
+      user-select: none;
+      outline: none;
+    }
+    .ScreenityDropdownMenuItem:hover {
+        background-color: #d4d4d6 !important;
+        cursor: pointer;
+    }
+    .ScreenityDropdownMenuItem[data-disabled] {
+      color: #6E7684; !important;
+      cursor: not-allowed;
+      background-color: #d4d4d6 !important;
+    }
+    
+    
+    
+    @keyframes slideUpAndFade {
+      from {
+        opacity: 0;
+        transform: translateY(2px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes slideRightAndFade {
+      from {
+        opacity: 0;
+        transform: translateX(-2px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes slideDownAndFade {
+      from {
+        opacity: 0;
+        transform: translateY(-2px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes slideLeftAndFade {
+      from {
+        opacity: 0;
+        transform: translateX(2px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    </style></div></div></body></html>
