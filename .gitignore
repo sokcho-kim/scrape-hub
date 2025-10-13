@@ -27,3 +27,6 @@ logs/
 
 # Environment
 .env
+
+# Temp files
+nul

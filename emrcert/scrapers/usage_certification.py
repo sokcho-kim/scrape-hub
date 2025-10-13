@@ -261,3 +261,8 @@ class UsageCertificationScraper:
             save_to_csv(self.buffer_history, 'usage_certification_history.csv')
             logger.info(f"{len(self.buffer_history)}개 이력 데이터 저장")
             self.buffer_history = []
+
+
+if __name__ == '__main__':
+    scraper = UsageCertificationScraper(headless=True)
+    scraper.run()
