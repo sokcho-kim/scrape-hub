@@ -281,7 +281,12 @@ class HIRALawScraperV2:
                 download_button.click()
 
             download: Download = download_info.value
-            filename = download.suggested_filename or f"{name}.hwp"
+            original_filename = download.suggested_filename or f"{name}.hwp"
+
+            # 파일명에 SEQ 추가하여 중복 방지: [SEQ] 원본파일명.hwp
+            filename_without_ext = original_filename.rsplit('.', 1)[0] if '.' in original_filename else original_filename
+            ext = original_filename.rsplit('.', 1)[1] if '.' in original_filename else 'hwp'
+            filename = f"[{seq}] {filename_without_ext}.{ext}"
 
             # 파일명 정리 (특수문자 제거)
             filename = self._clean_filename(filename)
