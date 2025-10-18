@@ -39,6 +39,23 @@
 
 ---
 
+### 3. [LIKMS 법령 크롤러](likms/README.md)
+
+대법원 사법정보공개포털에서 법령 텍스트 수집
+
+**데이터 출처**: https://portal.scourt.go.kr/pgp
+
+**수집 현황**:
+- 의료급여법 (법률): 1개 ✅
+- 의료급여법 시행령 (대통령령): 1개 ✅
+- 의료급여법 시행규칙 (보건복지부령): 1개 ✅
+- 총 수집: 3개
+- 상태: ✅ 완료 (100%)
+
+**상세 정보**: [likms/README.md](likms/README.md)
+
+---
+
 ## 📂 레포지토리 구조
 
 ```
@@ -54,13 +71,19 @@ scrape-hub/
 │   ├── debug/                    # 디버깅 스크립트
 │   └── README.md                 # 프로젝트 문서
 │
+├── likms/                        # LIKMS 법령 크롤러
+│   ├── scrapers/                 # 크롤러 모듈
+│   └── README.md                 # 프로젝트 문서
+│
 ├── data/                         # 수집된 데이터 (프로젝트별)
 │   ├── emrcert/                  # EMR 데이터 (CSV)
-│   └── hira_rulesvc/             # HIRA 데이터 (HWP/PDF)
+│   ├── hira_rulesvc/             # HIRA 데이터 (HWP/PDF)
+│   └── likms/                    # LIKMS 데이터 (TXT/JSON)
 │
 ├── logs/                         # 실행 로그 (프로젝트별)
 │   ├── emrcert/
-│   └── hira_rulesvc/
+│   ├── hira_rulesvc/
+│   └── likms/
 │
 ├── docs/                         # 프로젝트 문서
 │   ├── plans/                    # 작업 계획서
@@ -110,6 +133,12 @@ python -m emrcert.scrapers.usage_certification
 python -m hira_rulesvc.scrapers.law_scraper_v3
 ```
 
+#### LIKMS 법령 크롤러
+```bash
+# 대법원 포털에서 법령 수집
+python likms/scrapers/scourt_direct.py
+```
+
 ---
 
 ## 📊 수집 데이터 현황
@@ -121,7 +150,8 @@ python -m hira_rulesvc.scrapers.law_scraper_v3
 | **HIRA 고시** | 법령 문서 | 4개 | HWP | ✅ 완료 |
 | **HIRA 고시** | 고시기준 | 13개 | HWP | ✅ 완료 |
 | **HIRA 고시** | 행정해석 | 39개 | HWP/PDF | ✅ 완료 |
-| **합계** | - | **4,270개** | - | ✅ 완료 |
+| **LIKMS** | 법령 텍스트 | 3개 | TXT/JSON | ✅ 완료 |
+| **합계** | - | **4,273개** | - | ✅ 완료 |
 
 ---
 
@@ -130,6 +160,7 @@ python -m hira_rulesvc.scrapers.law_scraper_v3
 ### 프로젝트별 문서
 - [EMR 인증 크롤러](emrcert/README.md)
 - [HIRA 고시 문서 크롤러](hira_rulesvc/README.md)
+- [LIKMS 법령 크롤러](likms/README.md)
 
 ### 작업 계획서
 - [EMR 인증 계획](docs/plans/emrcert.md)
@@ -138,6 +169,7 @@ python -m hira_rulesvc.scrapers.law_scraper_v3
 ### 작업 일지
 - [EMR 인증 일지](docs/journal/emrcert/)
 - [HIRA 고시 일지](docs/journal/hira_rulesvc/)
+- [LIKMS 법령 일지](docs/journal/likms/)
 
 ---
 
@@ -206,6 +238,6 @@ python -m hira_rulesvc.scrapers.law_scraper_v3
 
 ---
 
-**최종 업데이트**: 2025-10-17
-**총 수집 데이터**: 4,270개 (EMR 4,214개 + HIRA 56개)
-**프로젝트 상태**: ✅ 수집 완료, 전처리 준비 중
+**최종 업데이트**: 2025-10-18
+**총 수집 데이터**: 4,273개 (EMR 4,214개 + HIRA 56개 + LIKMS 3개)
+**프로젝트 상태**: ✅ 수집 완료, RAG 시스템 구축 준비
