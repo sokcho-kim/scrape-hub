@@ -65,13 +65,32 @@
 **데이터 출처**: https://portal.scourt.go.kr/pgp
 
 **수집 현황**:
-- 의료급여법 (법률): 1개 ✅
-- 의료급여법 시행령 (대통령령): 1개 ✅
-- 의료급여법 시행규칙 (보건복지부령): 1개 ✅
-- 총 수집: 3개
+- 의료급여법 3종 ✅
+- 국민건강보험법 4종 ✅
+- 총 수집: 7개 법령
 - 상태: ✅ 완료 (100%)
 
 **상세 정보**: [likms/README.md](likms/README.md)
+
+---
+
+### 5. [Pharma 프로젝트](pharma/README.md) 🆕
+
+약제 관련 데이터 수집 및 파싱
+
+**데이터 소스**:
+- HIRA 약제급여목록
+- 약가정보
+- 약제 사용 기준 (PDF 표 파싱)
+
+**현재 작업**:
+- Upstage Document Parse API 테스트
+- 복잡한 표 구조 파싱 (병합셀, 중첩)
+- pdfplumber vs Upstage 비교 평가
+
+**상태**: 🔄 초기 설정 완료, 테스트 준비 중
+
+**상세 정보**: [pharma/README.md](pharma/README.md)
 
 ---
 
@@ -96,6 +115,11 @@ scrape-hub/
 │
 ├── likms/                        # LIKMS 법령 크롤러
 │   ├── scrapers/                 # 크롤러 모듈
+│   └── README.md                 # 프로젝트 문서
+│
+├── pharma/                       # Pharma 프로젝트 (약제)
+│   ├── scrapers/                 # 데이터 수집
+│   ├── parsers/                  # PDF/Excel 파싱
 │   └── README.md                 # 프로젝트 문서
 │
 ├── data/                         # 수집된 데이터 (프로젝트별)
