@@ -1,8 +1,13 @@
 # 표 파싱 시스템 개발 및 Pharma 프로젝트 초기화
 
-**작업일**: 2025-10-21
+**작업일**: 2025-10-21 ~ 2025-10-22
 **작업자**: Claude Code + 지민
 **상태**: 🔄 진행 중
+
+**최신 업데이트 (2025-10-22)**:
+- ✅ Upstage vs pdfplumber 성능 비교 완료 → **pdfplumber 선택**
+- ✅ 개선된 파싱 전략 설계 (페이지 간 표 병합, 중첩 테이블 처리)
+- ⏸️ 구현은 추후 진행 (계획만 정리 완료)
 
 ---
 
@@ -346,5 +351,105 @@ def split_merged_cells(row: list) -> list[list]:
 
 - 업무일지 제목 후보: "건강보험 법령-고시 연계 데이터 구축"
 - 전체 프로젝트 목표: 법령 → 고시 → 수가의 위계적 규제 체계를 데이터로 연결
-- Upstage 예산: $20 내 (현재 $0 사용)
-- pdfplumber 무료 대안을 최대한 활용, 복잡한 경우만 Upstage 사용 고려
+- Upstage 예산: $20 내 (실제 사용: $0.10)
+- **최종 결정**: pdfplumber 단독 사용 (Upstage 대비 모든 면에서 우수)
+
+---
+
+## 📅 2025-10-22 작업 내역
+
+### 1. Upstage API 성능 테스트 ✅
+
+**목적**: pdfplumber 대비 성능 비교 (병합셀, 중첩 테이블 처리)
+
+**작업 내용**:
+- Option A: 전체 문서 업로드 → **실패** (100페이지 제한)
+- Option B: 10페이지 분할 업로드 → **성공**
+- API 응답 파싱 로직 수정 (`element['content']['html']`)
+- pdfplumber와 동일 10페이지 비교
+
+**결과**:
+
+| 메트릭 | pdfplumber | Upstage | 승자 |
+|--------|-----------|---------|------|
+| 비용 | $0.00 | $0.10 (샘플) / $42.75 (전체) | 🏆 pdfplumber |
+| 속도 | 1.6초 | 45.2초 | 🏆 pdfplumber (28배 빠름) |
+| 표 감지 | 10개 | 8개 | 🏆 pdfplumber |
+| 행 추출 | 51개 | 49개 | 🏆 pdfplumber |
+| 페이지 제한 | 없음 | 100페이지 최대 | 🏆 pdfplumber |
+
+**핵심 발견**:
+- ❌ Upstage 100페이지 제한 → 858페이지 문서는 9개 파일 분할 필요
+- ✅ pdfplumber가 중첩 테이블도 별도로 감지 (Upstage는 통합)
+- ✅ 대형 표(28x4)는 둘 다 동일하게 처리
+
+**상세 문서**: `docs/journal/pharma/2025-10-22_upstage_vs_pdfplumber_comparison.md`
+
+---
+
+### 2. 개선된 파싱 전략 설계 ✅
+
+**발견된 문제**:
+1. p50 빈 페이지 (샘플링 전략 개선 필요)
+2. p100, p500 중첩 테이블 (표 안에 표)
+3. **페이지 간 연속 표** (Critical!) - 하나의 표가 여러 페이지에 걸쳐 있음
+
+**개선 방안**:
+
+```
+전체 파이프라인:
+1. 목차 추출 (규칙 기반)
+2. 복잡도 분석 → Upstage 사용 여부 자동 판단
+3. pdfplumber로 전체 문서 파싱
+4. ⭐ 페이지 간 표 병합 (bbox 좌표 + 헤더 일치)
+5. 중첩 테이블 계층 구조 생성 (parent-child)
+6. 병합셀 분할 (\n 기준)
+7. LLM 검증 (선택적, 복잡 섹션만)
+```
+
+**구현 완료 모듈**:
+- `hira/table_parser/toc_extractor.py` - 목차 추출 및 복잡도 분석
+- `hira/table_parser/cross_page_merger.py` - 페이지 간 표 병합
+
+**예상 효과**:
+- 표 개수: 1,500개 → 800개 (-47%, 페이지 중복 제거)
+- 평균 행/표: 5.1개 → 9.5개 (+86%, 연속성 보장)
+- 데이터 무결성: ❌ 페이지별 단절 → ✅ 섹션 연속
+
+**상세 문서**: `docs/journal/pharma/2025-10-22_improved_parsing_strategy.md`
+
+---
+
+### 3. 최종 의사결정 ✅
+
+**선택**: **pdfplumber 단독 사용**
+
+**근거**:
+1. 비용 절감: $42.75 (Upstage 대비)
+2. 속도 28배 빠름
+3. 더 높은 정확도 (표/행 감지)
+4. 페이지 제한 없음
+5. Upstage의 차별화 가치 없음
+
+**다음 단계** (구현 보류):
+1. 통합 파서 구현 (`integrated_parser.py`)
+2. 샘플 테스트 (p100-110, p200-210, p500-510)
+3. 전체 858페이지 파싱
+4. JSONL 출력 및 벡터 DB 적재
+
+---
+
+## 🔗 관련 문서 (업데이트)
+
+- [HIRA 표 파서 MVP](docs/journal/hira/2025-10-21_table_parser_mvp.md)
+- [Pharma 프로젝트 초기화](docs/journal/pharma/2025-10-21_project_init.md)
+- [Upstage vs pdfplumber 비교](docs/journal/pharma/2025-10-22_upstage_vs_pdfplumber_comparison.md) ⭐ 신규
+- [개선된 파싱 전략](docs/journal/pharma/2025-10-22_improved_parsing_strategy.md) ⭐ 신규
+- [HIRA 전자책 수집](docs/journal/hira/2025-10-20_ebook_collection_and_analysis.md)
+- [LIKMS 법령 수집](docs/journal/likms/2025-10-20_medical_law_collection.md)
+
+---
+
+**최종 업데이트**: 2025-10-22 03:30
+**누적 작업 시간**: 약 7시간 (MVP 5h + Upstage 테스트 2h)
+**다음 작업**: 표 파싱 구현은 보류, 다른 작업 진행

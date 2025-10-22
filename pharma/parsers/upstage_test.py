@@ -12,6 +12,10 @@ import time
 from pathlib import Path
 from typing import List, Dict, Any
 import requests
+from dotenv import load_dotenv
+
+# .env 파일 로드
+load_dotenv()
 
 # Upstage API 설정
 UPSTAGE_API_KEY = os.getenv("UPSTAGE_API_KEY", "")

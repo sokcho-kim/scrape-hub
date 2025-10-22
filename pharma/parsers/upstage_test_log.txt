@@ -1,0 +1,129 @@
+================================================================================
+OPTION B: Split Pages & Individual Upload
+================================================================================
+PDF: 요양급여의 적용기준 및 방법에 관한 세부사항(약제) - 2025년 7월판(G000DB5-2025-94).pdf
+Sample pages: [10, 50, 100, 200, 300, 400, 500, 600, 700, 800]
+Expected cost: $0.10
+
+Splitting PDF into 10 individual files...
+  Created: page_10.pdf
+  Created: page_50.pdf
+  Created: page_100.pdf
+  Created: page_200.pdf
+  Created: page_300.pdf
+  Created: page_400.pdf
+  Created: page_500.pdf
+  Created: page_600.pdf
+  Created: page_700.pdf
+  Created: page_800.pdf
+
+================================================================================
+Processing Page 10 (1/10)
+================================================================================
+  Calling Upstage API...
+  Status: OK
+  Tables: 0
+
+================================================================================
+Processing Page 50 (2/10)
+================================================================================
+  Calling Upstage API...
+  Status: OK
+  Tables: 0
+
+================================================================================
+Processing Page 100 (3/10)
+================================================================================
+  Calling Upstage API...
+  Status: OK
+  Tables: 1
+    Table 1: 6x2 rows/cols
+
+================================================================================
+Processing Page 200 (4/10)
+================================================================================
+  Calling Upstage API...
+  Status: OK
+  Tables: 1
+    Table 1: 3x2 rows/cols
+
+================================================================================
+Processing Page 300 (5/10)
+================================================================================
+  Calling Upstage API...
+  Status: OK
+  Tables: 1
+    Table 1: 2x2 rows/cols
+
+================================================================================
+Processing Page 400 (6/10)
+================================================================================
+  Calling Upstage API...
+  Status: OK
+  Tables: 1
+    Table 1: 2x2 rows/cols
+
+================================================================================
+Processing Page 500 (7/10)
+================================================================================
+  Calling Upstage API...
+  Status: OK
+  Tables: 1
+    Table 1: 4x2 rows/cols
+
+================================================================================
+Processing Page 600 (8/10)
+================================================================================
+  Calling Upstage API...
+  Status: OK
+  Tables: 1
+    Table 1: 2x2 rows/cols
+
+================================================================================
+Processing Page 700 (9/10)
+================================================================================
+  Calling Upstage API...
+  Status: OK
+  Tables: 1
+    Table 1: 2x2 rows/cols
+
+================================================================================
+Processing Page 800 (10/10)
+================================================================================
+  Calling Upstage API...
+  Status: OK
+  Tables: 1
+    Table 1: 28x4 rows/cols
+
+================================================================================
+OPTION B SUMMARY
+================================================================================
+Pages tested: 10
+Successful: 10/10 (100.0%)
+Total tables: 8
+Total rows: 49
+Avg rows/table: 6.1
+Time elapsed: 45.2s
+Actual cost: $0.10
+
+Saved: C:\Jimin\scrape-hub\data\pharma\parsed\upstage_test\option_b_summary.json
+
+================================================================================
+OPTION A: Full Document Upload
+================================================================================
+PDF: 요양급여의 적용기준 및 방법에 관한 세부사항(약제) - 2025년 7월판(G000DB5-2025-94).pdf
+Total pages: 858
+Expected cost: ~$8.58
+Will analyze pages: [10, 50, 100, 200, 300, 400, 500, 600, 700, 800]
+
+Uploading full document (this may take a few minutes)...
+  Calling Upstage API...
+  ERROR: API returned status 413
+  Response: {"error":{"code":"invalid_document","message":"The uploaded document exceeds the page limit. The maximum allowed is 100, but the current document has 858 pages.","param":"document","type":"invalid_request_error"}}
+ERROR: Failed to parse full document
+
+Cannot compare - one or both options failed
+
+================================================================================
+ALL TESTS COMPLETED
+================================================================================
