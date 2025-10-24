@@ -74,7 +74,31 @@
 
 ---
 
-### 5. [Pharma 프로젝트](pharma/README.md) 🆕
+### 5. [HIRA 암질환 사용약제 및 요법](hira_cancer/README.md) 🆕
+
+건강보험심사평가원 암질환 게시판 데이터 수집 및 파싱
+
+**데이터 출처**: https://www.hira.or.kr/bbsDummy.do?pgmid=HIRAA030069000000
+
+**수집 현황**:
+- 공고 (announcement): 217개 게시글, 471개 첨부파일
+- 공고예고 (pre_announcement): 232개 게시글, 299개 첨부파일
+- FAQ: 117개 게시글, 58개 첨부파일
+- 항암화학요법 (chemotherapy): 2개 게시글
+- **총 수집**: 484개 게시글 + 828개 첨부파일 (4,948페이지)
+- **상태**: ✅ 수집 완료, 파싱 완료 (99.4%)
+
+**파싱 현황**:
+- 파싱 성공: 823개 (99.4%)
+- 파싱 실패: 4개 (timeout 2개, 413 error 2개)
+- 출력 형식: Markdown + HTML
+- 출력 크기: 19.2 MB (JSON)
+
+**상세 정보**: [hira_cancer/README.md](hira_cancer/README.md)
+
+---
+
+### 6. [Pharma 프로젝트](pharma/README.md)
 
 약제 관련 데이터 수집 및 파싱
 
@@ -113,6 +137,13 @@ scrape-hub/
 │   ├── analyze_ebooks.py         # PDF 품질 분석
 │   └── README.md                 # 프로젝트 문서
 │
+├── hira_cancer/                  # HIRA 암질환 사용약제 크롤러
+│   ├── scraper.py                # 게시글 + 첨부파일 수집
+│   ├── parse_attachments.py      # 첨부파일 파싱 (Upstage API)
+│   ├── analyze_data.py           # 데이터 분석
+│   ├── archive/                  # 구버전 스크립트
+│   └── README.md                 # 프로젝트 문서
+│
 ├── likms/                        # LIKMS 법령 크롤러
 │   ├── scrapers/                 # 크롤러 모듈
 │   └── README.md                 # 프로젝트 문서
@@ -122,16 +153,25 @@ scrape-hub/
 │   ├── parsers/                  # PDF/Excel 파싱
 │   └── README.md                 # 프로젝트 문서
 │
+├── shared/                       # 공유 모듈
+│   └── parsers.py                # 공통 파서 (Upstage API)
+│
 ├── data/                         # 수집된 데이터 (프로젝트별)
 │   ├── emrcert/                  # EMR 데이터 (CSV)
 │   ├── hira_rulesvc/             # HIRA RULESVC 데이터 (HWP/PDF)
 │   ├── hira/                     # HIRA 전자책 (PDF)
-│   └── likms/                    # LIKMS 데이터 (TXT/JSON)
+│   ├── hira_cancer/              # HIRA 암질환 데이터
+│   │   ├── raw/                  # 원본 게시글 + 첨부파일 (HWP/PDF)
+│   │   ├── parsed/               # 파싱된 Markdown + HTML (JSON)
+│   │   └── parsed_preview/       # 텍스트 미리보기
+│   ├── likms/                    # LIKMS 데이터 (TXT/JSON)
+│   └── pharma/                   # Pharma 데이터
 │
 ├── logs/                         # 실행 로그 (프로젝트별)
 │   ├── emrcert/
 │   ├── hira_rulesvc/
 │   ├── hira/
+│   ├── hira_cancer/
 │   └── likms/
 │
 ├── docs/                         # 프로젝트 문서
@@ -194,6 +234,18 @@ python hira/analyze_ebooks.py
 python likms/scrapers/scourt_direct.py
 ```
 
+#### HIRA 암질환 사용약제 크롤러
+```bash
+# 게시글 + 첨부파일 수집
+python hira_cancer/scraper.py
+
+# 첨부파일 파싱 (Upstage API)
+python hira_cancer/parse_attachments.py --all
+
+# 샘플 확인
+python hira_cancer/view_parsed_samples.py
+```
+
 ---
 
 ## 📊 수집 데이터 현황
@@ -206,8 +258,11 @@ python likms/scrapers/scourt_direct.py
 | **HIRA RULESVC** | 고시기준 | 13개 | HWP | ✅ 완료 |
 | **HIRA RULESVC** | 행정해석 | 39개 | HWP/PDF | ✅ 완료 |
 | **HIRA 전자책** | 수가/청구 가이드 | 8개 (4,275p) | PDF | ✅ 수집 완료 |
+| **HIRA 암질환** | 게시글 | 484개 | HTML/JSON | ✅ 완료 |
+| **HIRA 암질환** | 첨부파일 (원본) | 828개 | HWP/PDF | ✅ 완료 |
+| **HIRA 암질환** | 첨부파일 (파싱) | 823개 (4,948p) | Markdown/HTML | ✅ 완료 (99.4%) |
 | **LIKMS** | 법령 텍스트 | 35개 | TXT/JSON | ✅ 완료 |
-| **합계** | - | **4,313개** | - | ✅ 수집 완료 |
+| **합계** | - | **6,448개** | - | ✅ 수집 완료 |
 
 ---
 
@@ -217,6 +272,7 @@ python likms/scrapers/scourt_direct.py
 - [EMR 인증 크롤러](emrcert/README.md)
 - [HIRA 급여기준 시스템](hira_rulesvc/README.md)
 - [HIRA 전자책](hira/README.md)
+- [HIRA 암질환 사용약제](hira_cancer/README.md)
 - [LIKMS 법령 크롤러](likms/README.md)
 
 ### 작업 계획서
@@ -227,6 +283,7 @@ python likms/scrapers/scourt_direct.py
 - [EMR 인증 일지](docs/journal/emrcert/)
 - [HIRA 급여기준 시스템 일지](docs/journal/hira_rulesvc/)
 - [HIRA 전자책 일지](docs/journal/hira/)
+- [HIRA 암질환 일지](docs/journal/hira_cancer/)
 - [LIKMS 법령 일지](docs/journal/likms/)
 
 ---
@@ -269,6 +326,13 @@ python likms/scrapers/scourt_direct.py
 |------|------|------|
 | 2025-10-20 | 의료 관련 법령 수집 | 35개 법령 수집 완료 |
 
+### HIRA 암질환 사용약제
+| 날짜 | 작업 | 결과 |
+|------|------|------|
+| 2025-10-22 | 초기 스크래핑 | 구조 분석 완료 |
+| 2025-10-23 | 전체 수집 | 484개 게시글 + 828개 첨부파일 |
+| 2025-10-24 | 첨부파일 파싱 | 823개 파싱 완료 (4,948p, $49.48) |
+
 ---
 
 ## 🚀 향후 계획
@@ -304,10 +368,17 @@ python likms/scrapers/scourt_direct.py
 - EMR 인증: 보건복지부 EMR 인증센터 (https://emrcert.mohw.go.kr)
 - HIRA RULESVC: 건강보험심사평가원 급여기준 시스템 (https://rulesvc.hira.or.kr)
 - HIRA 전자책: 건강보험심사평가원 전자책 (https://www.hira.or.kr/ra/ebook)
+- HIRA 암질환: 건강보험심사평가원 암질환 게시판 (https://www.hira.or.kr/bbsDummy.do?pgmid=HIRAA030069000000)
 - LIKMS: 대법원 사법정보공개포털 (https://portal.scourt.go.kr/pgp)
 
 ---
 
-**최종 업데이트**: 2025-10-20
-**총 수집 데이터**: 4,313개 + 4,275페이지 (EMR 4,214개 + HIRA RULESVC 56개 + HIRA 전자책 8개/4,275p + LIKMS 35개)
-**프로젝트 상태**: ✅ 수집 완료, 파싱 및 RAG 시스템 구축 진행 중
+**최종 업데이트**: 2025-10-24
+**총 수집 데이터**: 6,448개 + 9,223페이지
+- EMR 인증: 4,214개
+- HIRA RULESVC: 56개
+- HIRA 전자책: 8개 (4,275p)
+- HIRA 암질환: 484개 게시글 + 828개 첨부파일 (4,948p 파싱 완료)
+- LIKMS: 35개
+
+**프로젝트 상태**: ✅ 수집 완료, 파싱 완료 (99.4%), RAG 시스템 구축 준비 중
