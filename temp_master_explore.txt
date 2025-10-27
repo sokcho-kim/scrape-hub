@@ -1,0 +1,48 @@
+C:\Jimin\scrape-hub\hira_cancer\explore_master_data.py:2: DeprecationWarning: 
+Pyarrow will become a required dependency of pandas in the next major release of pandas (pandas 3.0),
+(to allow more performant data types, such as the Arrow string type, and better interoperability with other libraries)
+but was not found to be installed on your system.
+If this would cause problems for you,
+please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
+        
+  import pandas as pd
+================================================================================
+📁 HIRA 마스터 데이터 탐색
+================================================================================
+
+1️⃣ 배포용 상병마스터
+--------------------------------------------------------------------------------
+파일: 배포용 상병마스터_250908(2).xlsx
+
+skiprows=0:
+  컬럼: ['[붙임]', 'Unnamed: 1', 'Unnamed: 2']
+  행 수: 4
+  첫 행: [nan, '상병마스터 부가정보(법정감염병) 변경에 따른 신구대비표', nan]
+
+skiprows=5:
+  컬럼: ['Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8']
+  행 수: 5
+  첫 행: [nan, nan, '구분', '변경전', '변경후']
+
+skiprows=6:
+  컬럼: ['Unnamed: 0', 'Unnamed: 1', '구분', '변경전', '변경후', '법정감염병구분', 'Unnamed: 6', '변경내용', '적용개시일']
+  행 수: 4
+  첫 행: [nan, nan, nan, nan, nan]
+
+skiprows=7:
+  컬럼: ['Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', '현행', '신설', 'Unnamed: 7', 'Unnamed: 8']
+  행 수: 3
+  첫 행: [nan, nan, '상병기호', 'B34.88', 'B33.8']
+
+전체 데이터:
+  행 수: 10
+  컬럼: ['[붙임]', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8']
+
+
+2️⃣ 적용 약가파일
+--------------------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Jimin\scrape-hub\hira_cancer\explore_master_data.py", line 48, in <module>
+    drug_file = list(MASTER_DIR.glob('*약가*.xlsb'))[0]
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
