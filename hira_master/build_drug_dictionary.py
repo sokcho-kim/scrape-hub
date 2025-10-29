@@ -47,13 +47,14 @@ def extract_search_keys(product_name):
 
     출력 키:
     1. "옵디보주100mg" - 전체 제품명 (괄호 앞)
-    2. "옵디보" - 짧은 제품명 (숫자/단위 제거)
-    3. "니볼루맙" - 성분명 (괄호 안 첫 번째)
-    4. "opdivo" - 영문명 (별도 처리 필요)
+    2. "옵디보주" - 숫자/단위 제거
+    3. "옵디보" - 제형도 제거 (NEW!)
+    4. "니볼루맙" - 성분명 (괄호 안 첫 번째)
 
     정규화 키 (소문자, 공백/특수문자 제거):
     - "opdivoju100mg"
-    - "opdivo"
+    - "opdivoju"
+    - "opdivo"  (NEW!)
     - "nivolumab"
     """
     keys = []
@@ -61,25 +62,56 @@ def extract_search_keys(product_name):
     if pd.isna(product_name):
         return keys
 
-    # 1. 괄호 앞부분 = 제품명
+    # 1. 괄호 앞부분 = 제품명 추출
     match = re.match(r'([^(]+)', product_name)
-    if match:
-        full_product_name = match.group(1).strip()
-        keys.append(full_product_name)
+    if not match:
+        return keys
 
-        # 1-1. 제품명에서 숫자/단위 제거 (짧은 형태)
-        short_name = re.sub(r'\d+(\.\d+)?(mg|g|mL|밀리그램|그램|주|정|캡슐|시럽|연질캡슐).*', '', full_product_name)
-        short_name = short_name.strip()
-        if short_name and short_name != full_product_name:
-            keys.append(short_name)
+    full_product_name = match.group(1).strip()
+    keys.append(full_product_name)  # "옵디보주100mg" 또는 "킴리아주"
 
-    # 2. 괄호 안 = 성분명
+    # 2. 숫자 + 단위 제거
+    # 패턴: 숫자(소수점 포함) + 단위(mg, g, mL, 밀리그램, 그램 등)
+    without_dosage = re.sub(r'\d+(\.\d+)?(mg|g|mL|L|밀리그램|그램|킬로그램|밀리리터|리터|μg|mcg|IU|I\.U|KI\.U).*$', '', full_product_name, flags=re.IGNORECASE)
+    without_dosage = without_dosage.strip()
+
+    # 숫자가 제거됐으면 키 추가
+    if without_dosage and without_dosage != full_product_name:
+        keys.append(without_dosage)  # "옵디보주"
+
+    # 3. 제형 제거 (숫자 제거 여부와 무관하게 항상 시도)
+    # 제형 패턴: 주, 정, 캡슐, 시럽, 액, 연고, 크림, 겔, 패치, 좌제, 산, 과립 등
+    dosage_forms = [
+        '주', '정', '캡슐', '연질캡슐', '경질캡슐', '서방정', '서방캡슐',
+        '시럽', '액', '현탁액', '용액', '주사', '주사액',
+        '연고', '크림', '겔', '로션', '패치', '좌제', '좌약',
+        '산', '과립', '세립', '분말', '산제',
+        '점안액', '점비액', '점이액', '안연고',
+        '흡입제', '스프레이', '에어로졸',
+        '필름', '트로키', '츄정', '발포정'
+    ]
+
+    # without_dosage가 없으면 full_product_name에서 제형 제거 시도
+    base_name = without_dosage if without_dosage else full_product_name
+    without_form = base_name
+
+    for form in dosage_forms:
+        if base_name.endswith(form):
+            without_form = base_name[:-len(form)].strip()
+            break
+
+    # 제형이 제거됐고, 아직 키에 없으면 추가
+    if without_form and without_form != base_name and without_form not in keys:
+        keys.append(without_form)  # "옵디보" 또는 "킴리아"
+
+    # 4. 괄호 안 성분명
     match = re.search(r'\(([^)]+)\)', product_name)
     if match:
         ingredients = match.group(1)
         # 쉼표로 구분된 첫 번째 성분만 추출
         first_ingredient = ingredients.split(',')[0].strip()
-        keys.append(first_ingredient)
+        if first_ingredient:
+            keys.append(first_ingredient)  # "니볼루맙"
 
     return keys
 
