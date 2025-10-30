@@ -1,0 +1,310 @@
+active:
+- canonical_en: dttttocetaxel
+  canonical_ko: 도세탁셀
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - SUFFIX_MATCH_STRICT
+  count: 36
+- canonical_en: paclitaxel
+  canonical_ko: 파클리탁셀
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - SUFFIX_MATCH_STRICT
+  count: 36
+- canonical_en: capecitabine
+  canonical_ko: 카페시타빈
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  count: 32
+- canonical_en: ttttoxaliplatin
+  canonical_ko: 옥살리플라틴
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - SUFFIX_MATCH_STRICT
+  count: 31
+- canonical_en: heptaplatin
+  canonical_ko: 헵타플라틴
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - SUFFIX_MATCH_STRICT
+  count: 30
+- canonical_en: azacitidine
+  canonical_ko: 아자시티딘
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  count: 28
+- canonical_en: dasatinib
+  canonical_ko: 다사티닙
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - SUFFIX_MATCH_STRICT
+  - SUFFIX_MATCH_STRICT
+  count: 19
+- canonical_en: decitabine
+  canonical_ko: 데시타빈
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  count: 12
+- canonical_en: capecitabine
+  canonical_ko: 카페시타빈
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  count: 4
+- canonical_en: ibtttttoutinib
+  canonical_ko: 이브루티닙
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - SUFFIX_MATCH_STRICT
+  - SUFFIX_MATCH_STRICT
+  count: 3
+- canonical_en: ibtttttoutinib
+  canonical_ko: 이브루티닙
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - SUFFIX_MATCH_STRICT
+  - SUFFIX_MATCH_STRICT
+  count: 3
+- canonical_en: azacitidine
+  canonical_ko: 아자시티딘
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  count: 2
+- canonical_en: lttttotttttolatinib
+  canonical_ko: 롤라티닙
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - SUFFIX_MATCH_STRICT
+  - SUFFIX_MATCH_STRICT
+  count: 2
+- canonical_en: thittttotepa
+  canonical_ko: 치오테파
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  count: 1
+pending:
+- canonical_en: tttttoituxittttoab
+  canonical_ko: 리툭시맙
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 32
+- canonical_en: anasttttttottttozttttole
+  canonical_ko: 아나스트로졸
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 32
+- canonical_en: lettttttottttozttttole
+  canonical_ko: 레트로졸
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 31
+- canonical_en: exettttoestane
+  canonical_ko: 엑스메스탄
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 31
+- canonical_en: cetuxittttoab
+  canonical_ko: 세툭시맙
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 31
+- canonical_en: enttttocitabine
+  canonical_ko: 에노시타빈
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 30
+- canonical_en: tettttottttozttttolttttottttoide
+  canonical_ko: 테모졸로미드
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 30
+- canonical_en: bevacizuttttoab
+  canonical_ko: 베바시주맙
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 30
+- canonical_en: cladtttttoibine
+  canonical_ko: 클라드리빈
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 30
+- canonical_en: getttttoitinib
+  canonical_ko: 게피티니브
+  aliases: []
+  reason_codes:
+  - SUFFIX_MATCH_STRICT
+  - SUFFIX_MISMATCH
+  count: 30
+- canonical_en: ttttttoastuzuttttoab
+  canonical_ko: 트라스투주맙
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 30
+- canonical_en: alettttotuzuttttoab
+  canonical_ko: 알렘투주맙
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 28
+- canonical_en: thalidttttottttoide
+  canonical_ko: 탈리도마이드
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 24
+- canonical_en: ubenittttoex
+  canonical_ko: 우베니멕스
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 18
+- canonical_en: evetttttottttolittttous
+  canonical_ko: 에베로리무스
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 13
+- canonical_en: tettttositttttottttolittttous
+  canonical_ko: 템시롤리무스
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 11
+- canonical_en: pettttobtttttottttolizuttttoab
+  canonical_ko: 펨브롤리주맙
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 6
+- canonical_en: dacatttttobazine
+  canonical_ko: 다카바진
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 5
+- canonical_en: nivttttoluttttoab
+  canonical_ko: 니볼루맙
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 5
+- canonical_en: atezttttolizuttttoab
+  canonical_ko: 아테졸리주맙
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 5
+- canonical_en: clttttotttttoatttttoabine
+  canonical_ko: 클로파라빈
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 5
+- canonical_en: petttttotuzuttttoab
+  canonical_ko: 퍼투주맙
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: aveluttttoab
+  canonical_ko: 아벨루맙
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: ptttttoednisttttolttttone
+  canonical_ko: 아비라테론
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: tisagenlecleucel
+  canonical_ko: 티사젠렉류셀
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: oxaliplatin
+  canonical_ko: 옥살리플라틴
+  aliases: []
+  reason_codes:
+  - SUFFIX_MATCH_STRICT
+  - ALIAS_CONFLICT
+  count: 4
+- canonical_en: lenalidttttottttoide
+  canonical_ko: 레날리도마이드
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: pegtttttoilgtttttoastitttto
+  canonical_ko: 페그필그라스팀
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 3
+- canonical_en: dutttttovaluttttoab
+  canonical_ko: 더발루맙
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: dextttttoazttttoxane
+  canonical_ko: 덱스라족산
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ipilittttouttttoab
+  canonical_ko: 이필리무맙
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: attttosactttttoine
+  canonical_ko: 암사크린
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: cytatttttoabine
+  canonical_ko: 시타라빈
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: aptttttoepitant
+  canonical_ko: 아프레피탄트
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: dexattttoethasttttone
+  canonical_ko: 덱사메타손
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1

@@ -1,0 +1,367 @@
+# 게이트 체인 필터 규칙 (v1)
+# 목적: 약제 매칭 정제 - 정밀도 최우선
+
+# ============================================================
+# 1. 금칙어 필터 (제형/포장어)
+# ============================================================
+forbidden_forms:
+  # 하드 컷: 단독 토큰일 때 무조건 제외
+  hard:
+    - "바이알"
+    - "앰플"
+    - "프리필드시린지"
+    - "용액"
+    - "현탁액"
+    - "시럽"
+    - "파우더"
+    - "농축액"
+    - "정"
+    - "캡슐"
+    - "주사"
+    - "패치"
+    - "키트"
+    - "방출형"
+    - "포장"
+    - "용기"
+
+  # 조건부 컷: 포장/제형 문맥일 때만 제외 (약명 주변에 용량이 부수로 붙은 경우는 통과)
+  conditional:
+    - "mL"
+    - "mg"
+    - "mcg"
+    - "IU"
+
+# 컨텍스트 윈도우 설정 (±20자 이내에 성분 단서가 있는지 확인)
+context_window_size: 20
+
+# 성분 단서 키워드 (이 단어들이 있으면 제형/포장이 아닌 약제로 판단)
+ingredient_hints:
+  - "성분"
+  - "억제제"
+  - "길항제"
+  - "항암제"
+  - "항생제"
+  - "치료제"
+  - "주성분"
+  - "유효성분"
+  - "약효"
+  - "작용"
+  - "투여"
+  - "복용"
+
+# ============================================================
+# 2. 접미사 정합성 힌트 (EN ↔ KO)
+# ============================================================
+en_suffix_to_ko_hint:
+  # 단클론항체
+  - en: "mab"
+    ko: ["맙"]
+    strict: true
+
+  # 키나제 억제제
+  - en: "nib"
+    ko: ["닙", "니브"]
+    strict: true
+
+  - en: "tinib"
+    ko: ["티닙"]
+    strict: true
+
+  - en: "ciclib"
+    ko: ["시클립", "시클리브"]
+    strict: false
+
+  # 백금 계열
+  - en: "platin"
+    ko: ["플라틴"]
+    strict: true
+
+  # 탁산 계열
+  - en: "taxel"
+    ko: ["탁셀"]
+    strict: true
+
+  # 안트라사이클린 계열
+  - en: "rubicin"
+    ko: ["루비신"]
+    strict: true
+
+  # 알킬화제
+  - en: "mustine"
+    ko: ["머스틴"]
+    strict: true
+
+  # 스테로이드
+  - en: "sone"
+    ko: ["손", "이손", "솔론"]
+    strict: false
+
+  - en: "isone"
+    ko: ["이손", "손", "솔론"]
+    strict: false
+
+  - en: "solone"
+    ko: ["솔론", "손"]
+    strict: false
+
+  # PARP 억제제
+  - en: "parib"
+    ko: ["파립"]
+    strict: true
+
+  # 호르몬
+  - en: "terone"
+    ko: ["테론"]
+    strict: true
+
+# ============================================================
+# 3. 발음/철자 유사도 기준 (이원화)
+# ============================================================
+phonetic_threshold:
+  strict: 0.25   # 고빈도 약제, 핵심 엔트리 (count >= 20)
+  loose: 0.38    # 희귀/신규 약제 (count < 20) - Pass-2: 0.35→0.38 상향
+
+# 고빈도 임계값 설정
+high_frequency_threshold: 20
+
+# ============================================================
+# 4. 라우팅 패턴 (레짐/바이오마커/질환)
+# ============================================================
+route:
+  regimen: "dictionary/anchor/regimen.yaml"
+  biomarker: "dictionary/anchor/biomarker.yaml"
+  disease: "dictionary/anchor/disease_alias.yaml"
+
+patterns:
+  # 레짐 패턴 (단어 경계 필수)
+  regimen:
+    - "\\bFOLFOX(4|6|m)?\\b"
+    - "\\bFOLFIRI\\b"
+    - "\\bXELIRI\\b"
+    - "\\bCAPOX\\b"
+    - "\\bXELOX\\b"   # CAPOX와 동의어
+    - "\\bR-?CHOP\\b"
+    - "\\bABVD\\b"
+    - "\\bTCHP\\b"
+    - "\\bAC\\b(?![A-Za-z])"  # AC 뒤에 알파벳이 없을 때만
+    - "\\bDCF\\b"
+    - "\\bECF\\b"
+    - "\\bEOX\\b"
+    - "\\bFEC\\b"
+    - "\\bGemOx\\b"
+    - "\\bBEP\\b"
+    - "\\bVIP\\b"
+    - "\\bEP\\b"
+
+  # 바이오마커 패턴
+  biomarker:
+    - "HER2"
+    - "EGFR"
+    - "ALK"
+    - "PD-?L1"
+    - "PD-?1"
+    - "BRAF"
+    - "KRAS"
+    - "NRAS"
+    - "ROS1"
+    - "MET"
+    - "RET"
+    - "NTRK"
+    - "SP263"
+    - "TPS"
+    - "TMB"
+    - "MSI"
+    - "dMMR"
+
+  # 질환 약칭 패턴
+  disease:
+    - "NSCLC"
+    - "SCLC"
+    - "GIST"
+    - "MDS"
+    - "ALL"
+    - "AML"
+    - "CML"
+    - "CLL"
+    - "CRPC"
+    - "HCC"
+    - "RCC"
+    - "NHL"
+    - "DLBCL"
+    - "MM"       # Multiple Myeloma
+    - "CRC"      # Colorectal Cancer
+    - "TNBC"     # Triple Negative Breast Cancer
+
+# 동의어 매핑 (레짐)
+regimen_aliases:
+  - canonical: "CAPOX"
+    aliases: ["XELOX"]
+  - canonical: "FOLFOX"
+    aliases: ["FOLFOX4", "FOLFOX6", "FOLFOXm", "mFOLFOX6"]
+
+# ============================================================
+# 5. 충돌 해소 규칙
+# ============================================================
+conflict_resolution:
+  # 동일 ko ↔ 상이 en 충돌 시 우선순위
+  priority_by:
+    - "count"           # 빈도 높은 것 우선
+    - "source_quality"  # 출처 품질 (추후 확장)
+
+  # 충돌 발생 시 로그 필드
+  log_fields:
+    - "first_seen_source"
+    - "count"
+    - "all_en_candidates"
+
+# ============================================================
+# 6. 정규화 선행 단계
+# ============================================================
+normalization:
+  # Unicode 정규화
+  unicode_form: "NFKC"
+
+  # 문자 통일
+  quote_normalization:
+    - from: ["\u2018", "\u2019", "`"]  # ', ', `
+      to: "'"
+    - from: ["\u201C", "\u201D"]  # ", "
+      to: '"'
+
+  hyphen_normalization:
+    - from: ["–", "—", "―"]
+      to: "-"
+
+  plus_normalization:
+    - from: ["＋"]
+      to: "+"
+
+  # 공백 처리
+  remove_duplicate_spaces: true
+
+  # 대소문자 처리 (영문)
+  case_handling:
+    en: "lowercase"  # 영문은 소문자로 통일
+    ko: "as_is"      # 한글은 그대로
+
+# ============================================================
+# 7. 리포트 설정
+# ============================================================
+report:
+  # 각 reason_code별 대표 샘플 수
+  samples_per_reason: 3
+
+  # 원문 스팬 길이 (전후 문맥)
+  context_span_chars: 20
+
+  # Top N reason codes
+  top_reason_codes: 10
+
+# ============================================================
+# 8. 실행 모드
+# ============================================================
+execution:
+  # 드라이런 설정
+  dry_run_limit: 200  # 드라이런 시 처리할 항목 수
+
+  # 로깅 레벨
+  log_level: "INFO"
+
+  # 진행 상황 출력 간격
+  progress_interval: 50
+
+# ============================================================
+# 9. 수락 기준 (Acceptance Criteria)
+# ============================================================
+acceptance_criteria:
+  # active에 제형/포장어 허용 여부
+  allow_forms_in_active: false
+
+  # 테스트 케이스
+  test_cases:
+    - input: {en: "busulfan", ko: "바이알"}
+      expected: "drop"
+      reason: "FORM_TERM"
+
+    - input: {en: "prednisolone", ko: "아비라테론"}
+      expected: "pending"
+      reason: ["SUFFIX_MISMATCH", "PHONETIC_FAIL"]
+
+    - input: {en: "paclitaxel", ko: "파클리탁셀"}
+      expected: "active"
+      reason: ["PASS_ALL"]
+
+# ============================================================
+# 10. Pass-2: 컨텍스트 기반 승격 규칙
+# ============================================================
+context_promotion:
+  enabled: true
+
+  # 레짐 컨텍스트에서 발견된 약제 자동 승격
+  # (접미사 일치 + 음차 0.30~0.38 범위에서 승격)
+  regimen_based:
+    FOLFOX:
+      - oxaliplatin
+      - fluorouracil
+      - leucovorin
+      - 5-fu
+
+    FOLFIRI:
+      - irinotecan
+      - fluorouracil
+      - leucovorin
+      - 5-fu
+
+    XELOX:
+      - capecitabine
+      - oxaliplatin
+
+    "R-CHOP":
+      - rituximab
+      - cyclophosphamide
+      - doxorubicin
+      - vincristine
+      - prednisone
+
+    ABVD:
+      - doxorubicin
+      - bleomycin
+      - vinblastine
+      - dacarbazine
+
+  # 바이오마커 컨텍스트에서 발견된 약제 자동 승격
+  biomarker_based:
+    HER2:
+      - trastuzumab
+      - pertuzumab
+      - lapatinib
+      - neratinib
+
+    EGFR:
+      - gefitinib
+      - erlotinib
+      - afatinib
+      - osimertinib
+
+    ALK:
+      - crizotinib
+      - alectinib
+      - ceritinib
+      - brigatinib
+
+    "PD-L1":
+      - pembrolizumab
+      - nivolumab
+      - atezolizumab
+      - durvalumab
+
+  # 승격 조건
+  promotion_criteria:
+    # 접미사 일치 필수
+    require_suffix_match: true
+
+    # 음차 최소 임계값
+    min_phonetic_score: 0.30
+
+    # 충돌 발생 시 승격 여부
+    allow_on_conflict: false

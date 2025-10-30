@@ -94,6 +94,21 @@
 - 출력 형식: Markdown + HTML
 - 출력 크기: 19.2 MB (JSON)
 
+**약제 앵커 구축** (2025-10-30 Pass-3):
+- 게이트 체인 필터링 시스템 + 큐레이션 화이트리스트 ✅
+- 총 입력: 299개 en-ko 쌍 (241 자동 + 58 수동)
+- **Active 약제: 29개 (9.7%)** ← 주요 mAbs/kinase inhibitors 포함
+- Pending (음차 실패): 253개 (84.6%)
+- 큐레이션 화이트리스트: 56개 주요 약제 (bevacizumab, nivolumab, pembrolizumab 등)
+- 다음 단계: Pending 약제 검토 → 100+ Active 목표
+
+**항암요법 데이터 파싱** (2025-10-30):
+- 공고책자 PDF: 264페이지 → 498KB 텍스트 (248개 테이블) ✅
+- 사전신청요법 엑셀: 659개 승인 요법 (구조화) ✅
+- 약제명 추출: 124개 영문 + 202개 한글
+- 치료 레짐: FOLFOX, FOLFIRI, R-CHOP, ABVD 등
+- 다음 단계: 구조화된 데이터 추출 → DB 구축
+
 **상세 정보**: [hira_cancer/README.md](hira_cancer/README.md)
 
 ---
@@ -115,6 +130,29 @@
 **상태**: 🔄 초기 설정 완료, 테스트 준비 중
 
 **상세 정보**: [pharma/README.md](pharma/README.md)
+
+---
+
+### 7. [NCC 암정보 사전](ncc/README.md) 🆕
+
+국립암센터(NCC) 암정보 사전 수집 및 LLM 분류
+
+**데이터 출처**: https://www.cancer.go.kr/lay1/program/S1T523C837/dictionaryworks/list.do
+
+**수집 현황**:
+- 암 용어 사전: 3,543개
+- 수집 방식: Ajax 기반 동적 콘텐츠 추출
+- 상태: ✅ 완료 (100%)
+
+**분류 현황**:
+- LLM 기반 자동 분류: 3,543개 (100%)
+- 분류 카테고리: 9개 (약제, 암종, 치료법, 검사/진단, 증상/부작용, 유전자/분자, 임상시험/연구, 해부/생리, 기타)
+- 평균 신뢰도: **0.928** (매우 높음)
+- 사용 모델: GPT-4o-mini (Dynamic Few-shot)
+- 비용: $1.06
+- 상태: ✅ 분류 완료 (100%)
+
+**상세 정보**: [ncc/README.md](ncc/README.md)
 
 ---
 
@@ -262,7 +300,9 @@ python hira_cancer/view_parsed_samples.py
 | **HIRA 암질환** | 첨부파일 (원본) | 828개 | HWP/PDF | ✅ 완료 |
 | **HIRA 암질환** | 첨부파일 (파싱) | 823개 (4,948p) | Markdown/HTML | ✅ 완료 (99.4%) |
 | **LIKMS** | 법령 텍스트 | 35개 | TXT/JSON | ✅ 완료 |
-| **합계** | - | **6,448개** | - | ✅ 수집 완료 |
+| **NCC** | 암 용어 사전 | 3,543개 | JSON | ✅ 수집 완료 |
+| **NCC** | LLM 분류 | 3,543개 | JSON | ✅ 분류 완료 |
+| **합계** | - | **9,991개** | - | ✅ 수집 완료 |
 
 ---
 
@@ -274,6 +314,7 @@ python hira_cancer/view_parsed_samples.py
 - [HIRA 전자책](hira/README.md)
 - [HIRA 암질환 사용약제](hira_cancer/README.md)
 - [LIKMS 법령 크롤러](likms/README.md)
+- [NCC 암정보 사전](ncc/README.md)
 
 ### 작업 계획서
 - [EMR 인증 계획](docs/plans/emrcert.md)
@@ -285,6 +326,7 @@ python hira_cancer/view_parsed_samples.py
 - [HIRA 전자책 일지](docs/journal/hira/)
 - [HIRA 암질환 일지](docs/journal/hira_cancer/)
 - [LIKMS 법령 일지](docs/journal/likms/)
+- [NCC 암정보 사전 일지](docs/journal/ncc/)
 
 ---
 
@@ -332,6 +374,15 @@ python hira_cancer/view_parsed_samples.py
 | 2025-10-22 | 초기 스크래핑 | 구조 분석 완료 |
 | 2025-10-23 | 전체 수집 | 484개 게시글 + 828개 첨부파일 |
 | 2025-10-24 | 첨부파일 파싱 | 823개 파싱 완료 (4,948p, $49.48) |
+| 2025-10-30 | 약제 앵커 Pass-1/2 | Gate chain 필터링 (14 Active, 35 Pending) |
+| 2025-10-30 | 항암요법 데이터 파싱 | 공고책자 264p + 엑셀 659요법 완료 |
+| 2025-10-30 | 약제 앵커 Pass-3 | 큐레이션 화이트리스트 (29 Active, 56개 수동 매핑) |
+
+### NCC 암정보 사전
+| 날짜 | 작업 | 결과 |
+|------|------|------|
+| 2025-10-29 | 전체 수집 | 3,543개 용어 수집 완료 (9분) |
+| 2025-10-30 | LLM 분류 | 3가지 방식 비교 및 완료 (2시간 15분, $1.06) |
 
 ---
 
@@ -373,12 +424,13 @@ python hira_cancer/view_parsed_samples.py
 
 ---
 
-**최종 업데이트**: 2025-10-24
-**총 수집 데이터**: 6,448개 + 9,223페이지
+**최종 업데이트**: 2025-10-30
+**총 수집 데이터**: 9,991개 + 9,223페이지
 - EMR 인증: 4,214개
 - HIRA RULESVC: 56개
 - HIRA 전자책: 8개 (4,275p)
 - HIRA 암질환: 484개 게시글 + 828개 첨부파일 (4,948p 파싱 완료)
 - LIKMS: 35개
+- NCC: 3,543개 (LLM 분류 완료, 평균 신뢰도 0.928)
 
-**프로젝트 상태**: ✅ 수집 완료, 파싱 완료 (99.4%), RAG 시스템 구축 준비 중
+**프로젝트 상태**: ✅ 수집 완료, 파싱 완료, LLM 분류 완료, RAG 시스템 구축 준비 중

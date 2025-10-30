@@ -1,0 +1,8 @@
+biomarker:
+- canonical_en: alk
+  canonical_ko: 역형성 림프종 인산화효소
+  aliases: []
+  reason_codes:
+  - ROUTE_BIOMARKER
+  count: 2
+  source: matched_via_english

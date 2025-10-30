@@ -1,0 +1,1727 @@
+active:
+- canonical_en: benzttttodiazepines
+  canonical_ko: 벤조다이아제핀
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  count: 2
+- canonical_en: calcitttttonin
+  canonical_ko: 칼시토닌
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  count: 2
+- canonical_en: bevacizuttttoab
+  canonical_ko: 아바스틴
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: bevacizuttttoab
+  canonical_ko: 어베스틴
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: nivttttoluttttoab
+  canonical_ko: 옵디보
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: pettttobtttttottttolizuttttoab
+  canonical_ko: 키트루다
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: ttttttoastuzuttttoab
+  canonical_ko: 허셉틴
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: tttttoituxittttoab
+  canonical_ko: 맙테라
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: atezttttolizuttttoab
+  canonical_ko: 티센트릭
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: dutttttovaluttttoab
+  canonical_ko: 임핀지
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: ipilittttouttttoab
+  canonical_ko: 여보이
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: aveluttttoab
+  canonical_ko: 바벤시오
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: cetuxittttoab
+  canonical_ko: 얼비툭스
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: panituttttouttttoab
+  canonical_ko: 벡티빅스
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: tttttoattttoucitttttouttttoab
+  canonical_ko: 사이람자
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: petttttotuzuttttoab
+  canonical_ko: 퍼제타
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: datttttoatuttttouttttoab
+  canonical_ko: 다잘렉스
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: elttttotuzuttttoab
+  canonical_ko: 엠플리시티
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: ttttobinutuzuttttoab
+  canonical_ko: 가지바
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: btttttoentuxittttoab
+  canonical_ko: 애드세트리스
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: palbttttociclib
+  canonical_ko: 입랜스
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - SUFFIX_MISMATCH_WARN
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: tttttoibttttociclib
+  canonical_ko: 키스칼리
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - SUFFIX_MISMATCH_WARN
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: abettttoaciclib
+  canonical_ko: 버제니오
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - SUFFIX_MISMATCH_WARN
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: cabttttozantinib
+  canonical_ko: 카보자티닙
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - SUFFIX_MATCH_STRICT
+  - SUFFIX_MATCH_STRICT
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: ttttoidttttostautttttoin
+  canonical_ko: 라이다프트
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: ttttolapatttttoib
+  canonical_ko: 린파자
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: nitttttoapatttttoib
+  canonical_ko: 젤줄라
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: tttttoucapatttttoib
+  canonical_ko: 루브라카
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+- canonical_en: talazttttopatttttoib
+  canonical_ko: 탈제나
+  aliases: []
+  reason_codes:
+  - PASS_ALL
+  - CURATED_WHITELIST
+  count: 10
+pending:
+- canonical_en: acceletttttoated phase
+  canonical_ko: 가속기
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 9
+- canonical_en: petttttosistent
+  canonical_ko: 지속성
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 8
+- canonical_en: adjuvant
+  canonical_ko: 수술후보조요법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 6
+- canonical_en: inductitttton
+  canonical_ko: 관해유도요 법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 6
+- canonical_en: cttttonsttttolidatitttton
+  canonical_ko: 관해공고요 법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 6
+- canonical_en: ttttoaintenance
+  canonical_ko: 관해유지 요 법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 6
+- canonical_en: intensitttttoicatitttton
+  canonical_ko: 강화요 법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 6
+- canonical_en: pelvic ln
+  canonical_ko: 수술 후 골반 림프절
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 5
+- canonical_en: tttttottttolliculattttto lyttttophttttottttoa
+  canonical_ko: 양성인 소포림프종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 5
+- canonical_en: ttttto-chp
+  canonical_ko: 프레드니솔론
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: necadjuvant
+  canonical_ko: 투여요법은 선행화학요법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: cns ptttttottttophylaxis
+  canonical_ko: 중추신경 예방요 법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: cttttoncutttttotttttoent
+  canonical_ko: 동시화학방사선요법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: sequential
+  canonical_ko: 연속화학방사선요법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: cycle
+  canonical_ko: 주기
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: adenttttocatttttocinttttottttoa
+  canonical_ko: 선암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: pttttottttottttto histttttolttttogic gtttttoade
+  canonical_ko: 인 경우
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: patttttoa-attttotttttotic ln
+  canonical_ko: 수술 후 대동맥 주위 림프절
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: stage ivb
+  canonical_ko: 재발성 또는 전이성
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: papillatttttoy setttttottttous
+  canonical_ko: 유두상 장액성
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: cleattttto cell
+  canonical_ko: 또는 투명세포
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: basal cell skin cancettttto
+  canonical_ko: 기저세포피부암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: squattttottttous cell skin cancettttto
+  canonical_ko: 편평세포피부암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: ttttoycttttosis tttttoungttttoides
+  canonical_ko: 이상의 균상식육종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: sezatttttoy syndtttttottttottttoe
+  canonical_ko: 또는 시자리증후군
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: hsct
+  canonical_ko: 조혈모세포이식
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: dlctttto
+  canonical_ko: 일산화탄소 폐확산능력
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: chtttttottttonic phase
+  canonical_ko: 만성기
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: tttttolttttow cytttttottttoettttttoy
+  canonical_ko: 유세포분석법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: tttttoletttttoance
+  canonical_ko: 마약성 진통제를 장기간 사용하게 되면 내성
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: physical dependence
+  canonical_ko: 과 신체적 의존성
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: bttttone ttttoetastases
+  canonical_ko: 투여조건 영상의학적 검사로 골전이
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: bttttone lesitttton
+  canonical_ko: 및 골병변
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 4
+- canonical_en: adenttttocatttttocinttttottttoa
+  canonical_ko: 투여대상은 조직학적으로 선암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 3
+- canonical_en: unditttttotttttoetttttoentiated catttttocinttttottttoa
+  canonical_ko: 미분화암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 3
+- canonical_en: nasttttophatttttoyngeal catttttocinttttottttoa
+  canonical_ko: 비인두암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 3
+- canonical_en: tttttottttolliculattttto lyttttophttttottttoa
+  canonical_ko: 비호지킨림프종 중 소포림프종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 3
+- canonical_en: ttttoantle cell lyttttophttttottttoa
+  canonical_ko: 외투세포림프종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 3
+- canonical_en: ttttohspc
+  canonical_ko: 이 공고 시행 전 전이성 호르몬 감수성 전립선암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: weekly
+  canonical_ko: 중 주단위 요법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ttttoulti-disciplinatttttoy teattttos
+  canonical_ko: 위 원회
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: stage
+  canonical_ko: 병기분류
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: necadjuvant
+  canonical_ko: 선행화학요법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: stable disease
+  canonical_ko: 환자상태에 따라 안정병변
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ptttttottttogtttttoessive disease
+  canonical_ko: 질병이 진행
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: tuttttottttottttto ttttoatttttokettttto
+  canonical_ko: 하였거나 종양표지자
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ptttttoittttoatttttoy thetttttoapy
+  canonical_ko: 일차요 법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: nettttoadjuvant
+  canonical_ko: 선행화학요법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: stage iii
+  canonical_ko: 비편평상피세포
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: cttttoncutttttotttttoent chettttottttotttttoadittttothetttttoapy
+  canonical_ko: 동시항암화학방사선요법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: stage iv
+  canonical_ko: 변이가 없는 진행성
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: skipping
+  canonical_ko: 결손
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: gasttttttoic cancettttto
+  canonical_ko: 위암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: esttttophageal cancettttto
+  canonical_ko: 식도암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: squattttottttous cell catttttocinttttottttoa
+  canonical_ko: 투여대상은 조직학적으로 편평상피세포암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: squattttottttous cell catttttocinttttottttoa
+  canonical_ko: 편평상피세포암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: anaplastic catttttocinttttottttoa
+  canonical_ko: 미분화 갑상선암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ptttttottttogtttttoessive
+  canonical_ko: 진행성
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: panctttttoeatic cancettttto
+  canonical_ko: 췌장암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: livettttto cancettttto
+  canonical_ko: 간암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: systettttoic chettttottttothetttttoapy
+  canonical_ko: 라 함은 전신적 항암요법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: billiatttttoy ttttttoact cancettttto
+  canonical_ko: 담도암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: attttopulla ttttottttto vatettttto cancettttto
+  canonical_ko: 바터팽대부암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: cttttoltttton and tttttoectal cancettttto
+  canonical_ko: 직결장암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: petttttoituttttottttotttttoal lyttttophttttovasculattttto invttttolvettttoent
+  canonical_ko: 종양 주위 림프관이나 혈관 내에 암 세포가 존재하는 경우
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: bttttowel ttttobsttttttouctitttton at ptttttoesentatitttton
+  canonical_ko: 수술시 장 폐색이 있었던 경우
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: petttttoineutttttoal invasitttton
+  canonical_ko: 신경절 주변으로 암세포가 침범한 경우
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: wild type
+  canonical_ko: 정상형
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: btttttoeast cancettttto
+  canonical_ko: 유방암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: lvettttto
+  canonical_ko: 약제 독성 문제로 인해 허가사항에 따라 좌심실박출률
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ettttto and pttttto
+  canonical_ko: 호르몬 수용체
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: chettttottttothetttttoapy
+  canonical_ko: 투여단계는 고식적 항암화학요법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ttttoaintenance
+  canonical_ko: 유지요법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: cetttttovical cancettttto
+  canonical_ko: 자궁경부암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: cttttottttopletely tttttoegtttttoessitttton
+  canonical_ko: 개월에 질환이 완전 관해
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: utetttttoine cancettttto
+  canonical_ko: 자궁암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: catttttocinttttosatttttocttttottttoa
+  canonical_ko: 암육종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: utetttttoine satttttocttttottttoa
+  canonical_ko: 자궁육종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: kidney cancettttto
+  canonical_ko: 신장암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ntttton-cleattttto cell catttttocinttttottttoa
+  canonical_ko: 비투명세포암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: cleattttto cell catttttocinttttottttoa
+  canonical_ko: 투명세포암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: utttttottttothelial cancettttto
+  canonical_ko: 요로상피암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: sttttttottttottttoal invasitttton
+  canonical_ko: 기질 침범
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ptttttottttostate cancettttto
+  canonical_ko: 전립선암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ctttttopc
+  canonical_ko: 거세저항성 전립선암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: baseline
+  canonical_ko: 약제 사용을 시작한 시점
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: nadittttto
+  canonical_ko: 최저값
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: casttttttoatitttton-tttttoesistant
+  canonical_ko: 전이성 거세저항성
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: httttotttttottttottttone-sensitive
+  canonical_ko: 호르몬 감수성
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: head and neck cancettttto
+  canonical_ko: 두경부암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: nccn
+  canonical_ko: 범주
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: squattttottttous cell catttttocinttttottttoa
+  canonical_ko: 직학적으로 편평상피세포암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: katttttonttttotttttosky petttttotttttottttotttttottttoance- status
+    scttttotttttoe
+  canonical_ko: 기준 일상생활수행능력 평가지표
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: cttttonttttttoaindicated
+  canonical_ko: 를 시행할 수 없는 환자
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: neutttttottttoendttttoctttttoine nettttoplastttto
+  canonical_ko: 신경내분비 신생물
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ttttoetttttokel catttttocinttttottttoa
+  canonical_ko: 메르켈세포 암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: skin cancettttto
+  canonical_ko: 피부암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: bttttone cancettttto
+  canonical_ko: 골암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: chttttondtttttottttosatttttocttttottttoa
+  canonical_ko: 연골육종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ttttostettttosatttttocttttottttoa
+  canonical_ko: 골육종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: newly diagnttttosed
+  canonical_ko: 새로이 진단된
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: sega
+  canonical_ko: 치료적 중재가 필요하지만 근치적인 외과적 절제술을 받을 수 없는 뇌실막밑 거대세포 성상세포종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ttttoelanttttottttoa
+  canonical_ko: 악성흑색종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: sttttotttttot tissue satttttocttttottttoa
+  canonical_ko: 연조직육종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: tttttohabdttttottttoyttttosatttttocttttottttoa
+  canonical_ko: 횡문근육종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: neutttttottttoblastttttottttoa
+  canonical_ko: 신경모세포종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: tttttoetinttttoblastttttottttoa
+  canonical_ko: 망막모세포종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: cutanettttous t-cell lyttttophttttottttoa
+  canonical_ko: 세포 림프종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: tttttottttolliculattttto lyttttophttttottttoa
+  canonical_ko: 소포림프종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: inttttttoathecal
+  canonical_ko: 따라 상기요법 외에 척수강내
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: lyttttophttttoblastic lyttttophttttottttoa
+  canonical_ko: 림프모구림프종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: patttttotial tttttoettttoissitttton
+  canonical_ko: 중 유도 항암요법에 부분관해
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ttttoatttttoginal zttttone b-cell lyttttophttttottttoa
+  canonical_ko: 세포림프종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ttttoantle cell lyttttophttttottttoa
+  canonical_ko: 의 외투세포림프종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: tisagenlecleucel
+  canonical_ko: 세포치료제
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: histittttocytttttosis
+  canonical_ko: 조직구증
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: haettttottttophagttttocytic lyttttophttttohistittttocytttttosis
+  canonical_ko: 혈구포식림프조직구증
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: langetttttohans cell histittttocytttttosis
+  canonical_ko: 랑게르한스세포조직구증
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ttttoultiple ttttoyelttttottttoa
+  canonical_ko: 다발골수종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: unditttttotttttoetttttoenciated attttol
+  canonical_ko: 미분화 골수모구성 백혈병
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ttttoyelttttottttottttonttttocytic
+  canonical_ko: 골수구단핵구성 백혈병
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ttttoegakatttttoyttttoblastic
+  canonical_ko: 거핵모구성 백혈병
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: pttttottttottttto cytttttogenetics
+  canonical_ko: 세 이상 성인 중 세포유전학적으로 고위험
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: tttttoitttttost cttttto ttttottttto ctttttoi
+  canonical_ko: 유도요법 이후 완전관해
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: t-attttol
+  canonical_ko: 세 이상 성인의 새로 진단받은 치료 관련 급성 골수성 백혈병
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: t-attttol
+  canonical_ko: 이상 성인의 새로 진단받은 치료 관련 급성 골수성 백혈병
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: attttol-ttttotttttoc
+  canonical_ko: 또는 골수이형성증 관련 변화를 동반하는 급성 골수성 백혈병
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ttttoyelttttoid ttttottttto lyttttophttttoid blast phase
+  canonical_ko: 골수성 또는 림프구성 모구성 발증기
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: blast phase
+  canonical_ko: 급성기
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: tttttoetttttotttttoactttttotttttoy
+  canonical_ko: 불응성
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: chtttttottttonic lyttttophttttocytic leukettttoia
+  canonical_ko: 만성림프구성백혈병
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ttttoyelttttodysplastic syndtttttottttottttoes
+  canonical_ko: 골수형성이상증후군
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: juvenile ttttoyelttttottttottttonttttocytic leukettttoia
+  canonical_ko: 연소성 골수단핵구성 백혈병
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: tttttoluttttotttttottttoutttttoacil
+  canonical_ko: 후두 내 주입
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: lyttttophangittttoleittttottttoyttttottttoatttttosis
+  canonical_ko: 임파관평활근종증
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: adenttttocatttttocinttttottttoa unknttttown ttttotttttoigin
+  canonical_ko: 종격동 속발성 악성신생물
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: blettttottttoycin
+  canonical_ko: 흉막강 내 직접 주입
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: cttttottttoplete hettttoatttttolttttogic tttttoespttttonse
+  canonical_ko: 개월 반응 평가 시 완전 혈액학적 반응
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: gestatittttonal ttttttottttophttttoblastic tuttttottttottttto
+  canonical_ko: 고위험 또는 재발성 또는 불응성 임신성융모종양
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: gestatittttonal ttttttottttophttttoblastic tuttttottttottttto
+  canonical_ko: 성융모종양
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: placental site ttttttottttophttttoblastic tuttttottttottttto
+  canonical_ko: 태반유래융모종양
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: penile cancettttto
+  canonical_ko: 음경암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: haitttttoy cell leukettttoia
+  canonical_ko: 모상세포백혈병
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: giant cell tuttttottttottttto ttttottttto bttttone
+  canonical_ko: 골거대세포종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: egtttttottttto
+  canonical_ko: 표피성장인자수용체
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: genttttottttoic tuttttottttottttto abetttttotttttoatittttons
+  canonical_ko: 유전자 종양 변이
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: epicentettttto
+  canonical_ko: 병변의 중심
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: escc
+  canonical_ko: 절제 불가능한 진행성 또는 전이성 식도 편평세포암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ttttohspc
+  canonical_ko: 호르몬 반응성 전이성 전립선암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: lttttow ettttoetic tttttoisk
+  canonical_ko: 구토 유발 가능성 정도에서 저위험군
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ttttottttodetttttoate ettttoetic tttttoisk
+  canonical_ko: 구토가 유발되면 다음 치료일 부터는 중등도위험군
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: high ettttoetic tttttoisk level
+  canonical_ko: 고위험군
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: high ettttoetic tttttoisk
+  canonical_ko: 고위험군
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ttttottttodetttttoate ettttoetic tttttoisk
+  canonical_ko: 중등도위험군
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: physical dependence
+  canonical_ko: 체적 의존성
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: addictitttton
+  canonical_ko: 그러나 내성이나 신체적 의존성을 마약중독
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ceiling etttttotttttoect
+  canonical_ko: 마약성 진통제는 천정효과
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: h pttttton
+  canonical_ko: 돌발성 통증 시
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: equianalgesic dttttose table
+  canonical_ko: 등등진통용량표
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: incttttottttoplete ctttttottttosstttttoletttttoance
+  canonical_ko: 새 약제의 초회용량은 불완전한 교차내성
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: btttttoeakthtttttottttough pain
+  canonical_ko: 돌발성통증
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: antideptttttoessants
+  canonical_ko: 항우울제
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: anticttttonvulsants
+  canonical_ko: 항경련제
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: cttttotttttoticttttostetttttottttoids
+  canonical_ko: 스테로이드
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: phenttttothiazines
+  canonical_ko: 페노사이아진계
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: bisphttttosphttttonates
+  canonical_ko: 비스포스포네이트계
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: tttttoebtttttoile neuttttttottttopenia
+  canonical_ko: 발열을 동반한 호중구감소증
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: dttttoxitttttolutttttoidine
+  canonical_ko: 담관암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: petttttoitttttoneal catttttocinttttottttoatttttosis
+  canonical_ko: 복막에서 발견된 암종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ettttobtttttoyttttonal tttttohabdttttottttoyttttosatttttocttttottttoa
+  canonical_ko: 사골동횡문근육종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: ttttoediastinal getttttottttocelltuttttottttottttto
+  canonical_ko: 전종격동 악성신생물
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: panctttttoeatttttoblastttttottttoa
+  canonical_ko: 췌장모세포종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: hepatttttoblastttttottttoa
+  canonical_ko: 간모세포종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: adtttttoenal cttttotttttotical catttttocinttttottttoa
+  canonical_ko: 부신피질암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: hettttoangittttoendttttothelittttottttoa
+  canonical_ko: 혈관내피종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: alvettttolattttto sttttotttttot patttttot satttttocttttottttoa
+  canonical_ko: 포상연부육종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: systettttoic ttttoastttttocytttttosis
+  canonical_ko: 전신성비만세포증
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: cttttottttol
+  canonical_ko: 만성골수단핵구성백혈병
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: epithelittttoid hettttoangittttoendttttothelittttottttoa
+  canonical_ko: 상피모양혈관내피종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: jttttottttol
+  canonical_ko: 연소성골수단핵구성백혈병
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 2
+- canonical_en: cycle
+  canonical_ko: 항암요법 첫 주기
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: weekly
+  canonical_ko: 주단위 요법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: adjuvant
+  canonical_ko: 수술후보조요 법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: stage
+  canonical_ko: 병기
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: ttttoaintenance
+  canonical_ko: 유지요 법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: stable disease
+  canonical_ko: 주기 이후 질병진행이 없는 안정병변
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: stage iii
+  canonical_ko: 주기 이상 투여 후 질병진행이 없는 안정병변 이상의 절제 불가능한 국소 진행성
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: tttttottttoltttttoitttttointtttox
+  canonical_ko: 수술후보조요법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: stage iv
+  canonical_ko: 원격 전이
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: stage iv
+  canonical_ko: 전이성
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: sttttttottttottttoal invasitttton
+  canonical_ko: 선행화학요법을 받지 않은 전립선의 요로상피암에서 병리학적으로 기질 침범
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: casttttttoatitttton-tttttoesistant
+  canonical_ko: 이전에 도세탁셀을 포함한 화학요법에 경험이 있으며 질병진행이 확인된 전이성 거세저항성
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: squattttottttous cell catttttocinttttottttoa
+  canonical_ko: 조직학적으로 편평상피세포암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: advanced
+  canonical_ko: 진행성
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: squattttottttous cell catttttocinttttottttoa
+  canonical_ko: 전이성 두경부 편평상피세포암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: ditttttotttttouse latttttoge b-cell lyttttophttttottttoa
+  canonical_ko: 세포림프종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: ttttoantle cell lyttttophttttottttoa
+  canonical_ko: 이전에 한 가지 이상의 치료를 받은 경험이 있는 외투세포림프종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: ttttoantle cell lyttttophttttottttoa
+  canonical_ko: 이전 치료경험이 없는 성인의 외투세포림프종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: ttttoantle cell lyttttophttttottttoa
+  canonical_ko: 양성인 외투세포림프종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: tttttottttolliculattttto lyttttophttttottttoa
+  canonical_ko: 투여 중 또는 투여 후에 질병이 진행된 소포림프종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: stable disease
+  canonical_ko: 병용요법에 안정병변
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: tttttottttolliculattttto lyttttophttttottttoa
+  canonical_ko: 이전에 치료를 받은 소포림프종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: ttttoantle cell lyttttophttttottttoa
+  canonical_ko: 이전에 한 가지 이상의 치료를 받은 경험이 있는 외투세포 림프종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: inductitttton
+  canonical_ko: 관해유도요법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: inttttttoathecal
+  canonical_ko: 상기요법 외에 척수강내
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: inttttttoathecal
+  canonical_ko: 상기 요법 외에 척수강내
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: blast phase
+  canonical_ko: 급속기
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: nettttoadjuvant
+  canonical_ko: 비소세포폐암에서 백금 기반 화학요법과의 병용 투여로 수술 전 보조요법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: nettttoadjuvant
+  canonical_ko: 비소세포폐암 환자의 치료로서 수술 전 보조요법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: nettttoadjuvant
+  canonical_ko: 법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: adjuvant
+  canonical_ko: 그리고 이어서 수술 후 보조요법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: egtttttottttto
+  canonical_ko: 를 포함하여 치료받은 적이 있는 표피성장인자수용체
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: nettttoadjuvant
+  canonical_ko: 고위험 조기 삼중음성 유방암 환자의 치료로서 수술 전 보조요법
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: patttttoa-attttotttttotic ln
+  canonical_ko: 양성 수술후대동맥 주위 림프절
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: httttotttttottttottttone-sensitive
+  canonical_ko: 전이성호르몬김수성
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: pttttottttottttto cytttttogenetics
+  canonical_ko: 세포유전학적 으로 고위험
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: ttttottttodetttttoate ettttoetic tttttoisk level
+  canonical_ko: 중등도위험군
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: bttttone ttttoetastases
+  canonical_ko: 영상의학적 검사로 골전이
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: catttttottttottttotttttouttttto
+  canonical_ko: 간암
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: petttttoitttttoneal catttttocinttttottttoa
+  canonical_ko: 복막에서 발견된 암종
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: lttttow ettttoetic tttttoisk
+  canonical_ko: 구토유발 가능성 정도에서 저위험군
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: ttttottttodetttttoate ettttoetic tttttoisk
+  canonical_ko: 등을 투여하였더라도 구토가 유발되면 다음 치료일부터는 중등도위험군
+  aliases: []
+  reason_codes:
+  - PHONETIC_FAIL
+  count: 1
+- canonical_en: getttttoitinib
+  canonical_ko: 이레사
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: etttttolttttotinib
+  canonical_ko: 타쎄바
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: atttttoatinib
+  canonical_ko: 지오트립
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: ttttosittttoetttttotinib
+  canonical_ko: 타그리소
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: ctttttoizttttotinib
+  canonical_ko: 잘코리
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: alectinib
+  canonical_ko: 알레센자
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: cetttttoitinib
+  canonical_ko: 자이카디아
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: btttttoigatinib
+  canonical_ko: 알룬브릭
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: lttttotttttolatinib
+  canonical_ko: 로브레나
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: latttttottttottttttoectinib
+  canonical_ko: 비트락비
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: enttttttoectinib
+  canonical_ko: 로즈리트렉
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: dabtttttoatttttoenib
+  canonical_ko: 타핀라
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: ttttttoattttoetinib
+  canonical_ko: 메키니스트
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: vettttoutttttoatttttoenib
+  canonical_ko: 젤보라프
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: ibtttttoutinib
+  canonical_ko: 임브루비카
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: acalabtttttoutinib
+  canonical_ko: 칼큄브라
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: sunitinib
+  canonical_ko: 수텐트
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: sttttotttttoatttttoenib
+  canonical_ko: 넥사바
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: pazttttopanib
+  canonical_ko: 보트리엔트
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: tttttoegttttotttttoatttttoenib
+  canonical_ko: 스티바가
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: cabttttozantinib
+  canonical_ko: 카보메틱스
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: lenvatinib
+  canonical_ko: 렌비마
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: axitinib
+  canonical_ko: 인라이타
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: ittttoatinib
+  canonical_ko: 글리벡
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: dasatinib
+  canonical_ko: 스프라이셀
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: nilttttotinib
+  canonical_ko: 타시그나
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: bttttosutinib
+  canonical_ko: 보슐리프
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: pttttonatinib
+  canonical_ko: 아이클루시그
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: tttttouxttttolitinib
+  canonical_ko: 자카비
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: tttttoedtttttoatinib
+  canonical_ko: 인레비타
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
+- canonical_en: giltetttttoitinib
+  canonical_ko: 조스파타
+  aliases: []
+  reason_codes:
+  - SUFFIX_MISMATCH
+  count: 10
