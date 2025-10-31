@@ -4,31 +4,94 @@ disease:
   aliases: []
   reason_codes:
   - ROUTE_DISEASE
-  count: 8
+  count: 21
   source: matched_via_english
-- canonical_en: sttttoall lyttttophttttocytic lyttttophttttottttoa
-  canonical_ko: 소림프구림프종
+- canonical_en: palliative
+  canonical_ko: 고식적 요법
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 5
+  source: matched_via_english
+- canonical_en: ttttoedian ttttovetttttoall sutttttovival
+  canonical_ko: 생존기간
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 5
+  source: matched_via_english
+- canonical_en: gallbladdettttto caneettttto
+  canonical_ko: 담낭암
   aliases: []
   reason_codes:
   - ROUTE_DISEASE
   count: 4
   source: matched_via_english
-- canonical_en: dlbcl
-  canonical_ko: 세포 림프종
+- canonical_en: gallbladdettttto cancettttto
+  canonical_ko: 담낭암
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 4
+  source: matched_via_english
+- canonical_en: ttttovetttttoall sutttttovival
+  canonical_ko: 개월 및 전체 생존기간
   aliases: []
   reason_codes:
   - ROUTE_DISEASE
   count: 3
   source: matched_via_english
-- canonical_en: sttttoall cell lung cancettttto
-  canonical_ko: 소세포폐암
+- canonical_en: tttttoallttttopian tube cancettttto
+  canonical_ko: 나팔관암
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 3
+  source: matched_via_english
+- canonical_en: palliative
+  canonical_ko: 고식적요 법
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 3
+  source: matched_via_english
+- canonical_en: palliative endttttoctttttoine thetttttoapy
+  canonical_ko: 분비요법
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 3
+  source: matched_via_english
+- canonical_en: ttttovetttttoall sutttttovival
+  canonical_ko: 및 생존기간
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 3
+  source: matched_via_english
+- canonical_en: ttttovetttttoall tttttoespttttonse tttttoate
+  canonical_ko: 병용요법이 반응률
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 3
+  source: matched_via_english
+- canonical_en: gist
+  canonical_ko: 에 모두 실패한 위장관기질종양
   aliases: []
   reason_codes:
   - ROUTE_DISEASE
   count: 2
   source: matched_via_english
-- canonical_en: ntttton-sttttoall cell lung cancettttto
-  canonical_ko: 비소세포폐암
+- canonical_en: ttttovetttttoall tttttoespttttonse tttttoate
+  canonical_ko: 전체 반응률
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 2
+  source: matched_via_english
+- canonical_en: sttttoall lyttttophttttocytic lyttttophttttottttoa
+  canonical_ko: 소림프구성 림프종
   aliases: []
   reason_codes:
   - ROUTE_DISEASE
@@ -49,35 +112,189 @@ disease:
   count: 2
   source: matched_via_english
 - canonical_en: palliative chettttottttothetttttoapy
-  canonical_ko: 고식적 항암화학요 법
+  canonical_ko: 고식적 항암화학요법
   aliases: []
   reason_codes:
   - ROUTE_DISEASE
   count: 2
   source: matched_via_english
-- canonical_en: gist
-  canonical_ko: 에 모두 실패한 위장관기질종양
+- canonical_en: palliative chettttottttothetttttoapy
+  canonical_ko: 고식적항암화학요법
   aliases: []
   reason_codes:
   - ROUTE_DISEASE
   count: 2
   source: matched_via_english
 - canonical_en: nsclc
-  canonical_ko: 백금을 포함한 항암화학요법 도중이나 이후에 질병이 진행된 전이성 비소세포폐암
+  canonical_ko: 양성 진행성 비소세포폐암
   aliases: []
   reason_codes:
   - ROUTE_DISEASE
   count: 2
+  source: matched_via_english
+- canonical_en: clinically signitttttoicant valvulattttto disease
+  canonical_ko: 임상적으로 유의한 판막질환 환자
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 2
+  source: matched_via_english
+- canonical_en: ntttton-sttttoall cell lung cancettttto
+  canonical_ko: 비소세포폐암
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 2
+  source: matched_via_english
+- canonical_en: sttttoall l yttttophttttocyti c lyttttophttttottttoa
+  canonical_ko: 세 이상의 이 전에 치료 받은 적이 없는 만성 림프구성백혈병 또는 소림프구 림프종
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 2
+  source: matched_via_english
+- canonical_en: lg-nhl
+  canonical_ko: 저등급 비호치킨 림프종
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 2
+  source: matched_via_english
+- canonical_en: tttttoallttttopian tube - cancettttto
+  canonical_ko: 과 나팔관암
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 2
+  source: matched_via_english
+- canonical_en: ttttoedian ttttovetttttoall sutttttovival
+  canonical_ko: 및 생존기간
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 2
+  source: matched_via_english
+- canonical_en: tttttoechallenge
+  canonical_ko: 소세포폐암에 백금기반항암요법 재투여시
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 2
+  source: matched_via_english
+- canonical_en: sttttoall cell lung cancettttto
+  canonical_ko: 소세포폐암
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 2
+  source: matched_via_english
+- canonical_en: ntttton-sttttoall cell lung ca ncettttto
+  canonical_ko: 비소세포폐 암
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 2
+  source: matched_via_english
+- canonical_en: sttttoall lyttttophttttocytic lyttttophttttottttoa
+  canonical_ko: 소림프구림프종
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 2
+  source: matched_via_english
+- canonical_en: gist
+  canonical_ko: 이전에 이매티닙과 수니티닙으로 치료를 받은 적이 있는 전이성 또는 절제불가능한 국소진행성 위장관기질종양
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: gist
+  canonical_ko: 위장관 기저 종양
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttoedian ttttovetttttoall sutttttovival
+  canonical_ko: 투여군은 대조군인 위약군에 비하여 생존기간
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttoedian ttttovetttttoall sutttttovival
+  canonical_ko: 비하여 생존기간
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: gist
+  canonical_ko: 를 발현하는
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: gist
+  canonical_ko: 저항성 및 불내약성으로
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: sttttoall lyttttophttttocytic lyttttophttttottttoa
+  canonical_ko: 림프구성 림프종
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttovetttttoall tttttoespttttonse tttttoate
+  canonical_ko: 상 문헌으로 반응률
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttovetttttoall tttttoespttttonse tttttoate
+  canonical_ko: 문헌으로 반응률
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttovetttttoall tttttoespttttonse tttttoate
+  canonical_ko: 또한 임상연구에서 반응률
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttovetttttoall tttttoespttttonse
+  canonical_ko: 전체 반응률
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: palliative endttttoctttttoine thetttttoapy
+  canonical_ko: 고식적내분비요법
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: palliative endttttoctttttoine thetttttoapy
+  canonical_ko: 내분비요법
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
   source: matched_via_english
 - canonical_en: tttttoallttttopian tube cancettttto
   canonical_ko: 원발성 나팔관암
-  aliases: []
-  reason_codes:
-  - ROUTE_DISEASE
-  count: 2
-  source: matched_via_english
-- canonical_en: palliative
-  canonical_ko: 고식적요 법
   aliases: []
   reason_codes:
   - ROUTE_DISEASE
@@ -85,6 +302,265 @@ disease:
   source: matched_via_english
 - canonical_en: sttttoall lyttttophttttocytic lyttttophttttottttoa
   canonical_ko: 세 이상의 이전에 치료 받은 적이 없는 만성림프구성백혈병 또는 소림프구림프종
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: sttttoall lyttttophttttocytic lyttttophttttottttoa
+  canonical_ko: 세 이상의 이전에 치료 받은 적이 없는 만성 림프구성 백혈병 또는 소림프구림프종
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: palliative
+  canonical_ko: 고식적 요 법
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: nsclc
+  canonical_ko: 저해제로 치료받은 적이 있는 진행성 또는 전이성 비소세포폐암
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: nsclc
+  canonical_ko: 양성 전이성 비소세포폐암
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: palliative chettttottttothetttttoapy
+  canonical_ko: 고식적 항암화학요 법
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: sttttoall l yttttophttttocyt i c lyttttophttttottttoa
+  canonical_ko: 세 이상의 이 전에 치료 받은 적이 없는 만성 림프구성백혈병 또는 소림프구 림프종
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: dlbcl
+  canonical_ko: 세포 림프종
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: nsclc
+  canonical_ko: 백금을 포함한 항암화학요법 도중이나 이후에 질병이 진행된 전이성 비소세포폐암
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: nsclc
+  canonical_ko: 항암화학요법 도중이나이후에질병이 진행된 전이성 비소세포폐암
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: nsclc
+  canonical_ko: 백금을 포함한 항암화학요법 도중이나이후에질병이 진행된 전이성 비소세포폐암
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: clinically signitttttoicant valvulattttto disease
+  canonical_ko: 임상적으로유의한판막질환환자
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: palliative
+  canonical_ko: 기존의 공고요법인 글리벡정의 고식 적 요법
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: palliative
+  canonical_ko: 상병은 근치적 수술이 불가능한 경우가 대부분이므로 투여요법은 고식적요법
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: palliative
+  canonical_ko: 전이성의 경우 고식적요법
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: palliative
+  canonical_ko: 재발성의 경우 고식적요법
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: gist
+  canonical_ko: 위장관기질종양
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttovetttttoall tttttoespttttonse tttttoate
+  canonical_ko: 상 임상시험에서 대조군에 비해 반응률
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttoedian ttttovetttttoall sutttttovival
+  canonical_ko: 상 임상시험에서 대조군에 비해 생존기간
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttovetttttoall sutttttovival
+  canonical_ko: 생존기간
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttovetttttoall tttttoespttttonse tttttoate
+  canonical_ko: 상 허가임상연구에서 대조군에 비해 반응률
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttovetttttoall tttttoespttttonse tttttoate
+  canonical_ko: 구에서 대조군에 비해 반응률
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttovetttttoall sutttttovival
+  canonical_ko: 단독요법을 비교한 허가임상연구에서 생존기 간
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttovetttttoall sutttttovival
+  canonical_ko: 상 임상시험에서 대조군 에 비해 반응률
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttovetttttoall tttttoespttttonse tttttoate
+  canonical_ko: 반응 률
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttovetttttoall tttttoespttttonse tttttoate
+  canonical_ko: 상 임 상시험에서 대조군에 비해 반응률
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttovetttttoall tttttoespttttonse tttttoate
+  canonical_ko: 시험에서 대조군에 비해 반응률
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttovetttttoall sutttttovival
+  canonical_ko: 에 비해 생존 기간
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttoedian ttttovetttttoall sutttttovival
+  canonical_ko: 전체생존중앙값
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttoedian ttttovetttttoall sutttttovival
+  canonical_ko: 전체생존중 앙값
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttoedian ttttovetttttoall sutttttovival
+  canonical_ko: 에 비해 반응 률 및 생존기간
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttoedian ttttovetttttoall sutttttovival
+  canonical_ko: 중앙 생존기간
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttoedian ttttovetttttoall sutttttovival
+  canonical_ko: 중앙생존기간
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttoedian ttttovetttttoall sutttttovival
+  canonical_ko: 에 비하여 중앙생존기간
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: dlbcl
+  canonical_ko: 세포림프종
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttovetttttoall sutttttovival
+  canonical_ko: 투여군 및 투여하지 않은 군 모두에서 전체 생존기간
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttovetttttoall sutttttovival
+  canonical_ko: 이전에 치료 받지 않은 군에서 전체 생존기간
+  aliases: []
+  reason_codes:
+  - ROUTE_DISEASE
+  count: 1
+  source: matched_via_english
+- canonical_en: ttttoedian ttttovetttttoall sutttttovival
+  canonical_ko: 투여군에 비하여 생존기간
   aliases: []
   reason_codes:
   - ROUTE_DISEASE
@@ -99,20 +575,6 @@ disease:
   source: matched_via_english
 - canonical_en: sttttoall lyttttophttttocytic lyttttophttttottttoa
   canonical_ko: 세 이상의 이전에 치료 받은 적이 없는 만성림프구성 백혈병 또는 소림프구림프종
-  aliases: []
-  reason_codes:
-  - ROUTE_DISEASE
-  count: 1
-  source: matched_via_english
-- canonical_en: gist
-  canonical_ko: 위장관기질종양
-  aliases: []
-  reason_codes:
-  - ROUTE_DISEASE
-  count: 1
-  source: matched_via_english
-- canonical_en: dlbcl
-  canonical_ko: 비호지킨림프종
   aliases: []
   reason_codes:
   - ROUTE_DISEASE

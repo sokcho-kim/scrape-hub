@@ -87,12 +87,24 @@ class DrugAnchorRefiner:
         if curated_pairs_path and Path(curated_pairs_path).exists():
             with open(curated_pairs_path, 'r', encoding='utf-8-sig') as f:
                 curated_data = json.load(f)
-                for item in curated_data.get('matched_via_english', []):
-                    if item.get('source') == 'manual_curated':
-                        self.curated_pairs_raw.append({
-                            'en': item.get('english', ''),
-                            'ko': item.get('korean', '')
-                        })
+
+                # manual_drugs 형식 처리: {"manual_drugs": {"drug_en": ["ko1", "ko2"]}}
+                if 'manual_drugs' in curated_data:
+                    for en, ko_list in curated_data['manual_drugs'].items():
+                        for ko in ko_list:
+                            self.curated_pairs_raw.append({
+                                'en': en,
+                                'ko': ko
+                            })
+
+                # 레거시 형식 처리: {"matched_via_english": [...]}
+                elif 'matched_via_english' in curated_data:
+                    for item in curated_data.get('matched_via_english', []):
+                        if item.get('source') == 'manual_curated':
+                            self.curated_pairs_raw.append({
+                                'en': item.get('english', ''),
+                                'ko': item.get('korean', '')
+                            })
 
         # 컨텍스트 시그널 토큰
         self.ctx_tokens = [
@@ -537,6 +549,13 @@ class DrugAnchorRefiner:
         """
         all_reasons = []
 
+        # 최우선: 큐레이션 화이트리스트 체크 (모든 게이트 우회)
+        if self.is_curated_pair(entry):
+            self.logger.info(f"Curated pair - bypassing all gates: {entry.en} → {entry.ko}")
+            entry.decision = "active"
+            entry.reason_codes = ["PASS_ALL", "CURATED_WHITELIST"]
+            return entry
+
         # 전처리: 브랜드명 해소
         entry = self.resolve_brand_name(entry)
 
@@ -565,13 +584,8 @@ class DrugAnchorRefiner:
             return entry
 
         # 게이트 4: 음차/철자 유사도
-        # 큐레이션 화이트리스트 체크 (최우선)
-        if self.is_curated_pair(entry):
-            self.logger.info(f"Curated pair bypassing phonetic: {entry.en} → {entry.ko}")
-            all_reasons.append("CURATED_WHITELIST")
-            phonetic_passed = True
         # strict suffix가 매칭된 경우, 음차 검사 스킵
-        elif strict_suffix_matched:
+        if strict_suffix_matched:
             phonetic_passed = True
         else:
             pass_gate4, reasons4 = self.check_phonetic_similarity(entry)

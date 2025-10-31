@@ -58,9 +58,10 @@ class DrugCandidateHarvester:
         self.candidates = []  # List[Dict]
         self.seen = set()  # 중복 제거용
 
-    def extract_from_json(self, json_path: Path):
+    def extract_from_json(self, json_path: Path, verbose: bool = False):
         """공고책자 JSON에서 추출"""
-        print(f"[1/3] Processing JSON: {json_path.name}")
+        if verbose:
+            print(f"Processing JSON: {json_path.name}")
 
         with open(json_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
@@ -152,7 +153,8 @@ class DrugCandidateHarvester:
                         'context': context.replace('\n', ' ').strip()
                     })
 
-        print(f"  Extracted: {len(self.candidates)} candidates so far")
+        if verbose:
+            print(f"  Extracted: {len(self.candidates)} candidates so far")
 
     def extract_from_excel(self, excel_path: Path):
         """엑셀 659개 요법에서 추출"""
@@ -319,17 +321,36 @@ class DrugCandidateHarvester:
 
 def main():
     print("=" * 80)
-    print("약제 후보 대량 채굴 (Drug Candidate Harvester)")
+    print("약제 후보 대량 채굴 (Drug Candidate Harvester) - FULL MODE")
     print("=" * 80)
 
     harvester = DrugCandidateHarvester()
 
-    # 1. 공고책자 JSON
-    json_path = Path("data/hira_cancer/parsed/chemotherapy/공고책자_20251001.json")
-    if json_path.exists():
-        harvester.extract_from_json(json_path)
-    else:
-        print(f"[WARNING] JSON not found: {json_path}")
+    # 1. 모든 파싱된 JSON 파일 처리 (824개)
+    parsed_dirs = [
+        "data/hira_cancer/parsed/announcement",
+        "data/hira_cancer/parsed/faq",
+        "data/hira_cancer/parsed/pre_announcement",
+        "data/hira_cancer/parsed/chemotherapy"
+    ]
+
+    total_files = 0
+    for dir_path in parsed_dirs:
+        dir_obj = Path(dir_path)
+        if not dir_obj.exists():
+            print(f"[WARNING] Directory not found: {dir_path}")
+            continue
+
+        json_files = list(dir_obj.glob("**/*.json"))
+        print(f"\n[Processing] {dir_path}: {len(json_files)} files")
+
+        for idx, json_path in enumerate(json_files, 1):
+            if idx % 100 == 0:
+                print(f"  Progress: {idx}/{len(json_files)} files, {len(harvester.candidates)} candidates so far")
+            harvester.extract_from_json(json_path, verbose=False)
+            total_files += 1
+
+    print(f"\n[Summary] Processed {total_files} JSON files")
 
     # 2. 엑셀
     excel_path = Path("data/hira_cancer/raw/attachments/chemotherapy/사전신청요법(용법용량 포함)및 불승인요법_250915.xlsx")

@@ -1,0 +1,9 @@
+regimen:
+- canonical_en: ac cttttottttobinatitttton detttttoined as eithettttto dttttoxttttotttttoubicin
+    ttttottttto epitttttoubicin with cyclttttophttttosphattttoide
+  canonical_ko: 추가
+  aliases: []
+  reason_codes:
+  - ROUTE_REGIMEN
+  count: 2
+  source: matched_via_english

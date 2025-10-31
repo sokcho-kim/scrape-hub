@@ -94,20 +94,22 @@
 - 출력 형식: Markdown + HTML
 - 출력 크기: 19.2 MB (JSON)
 
-**약제 앵커 구축** (2025-10-30 Pass-3):
-- 게이트 체인 필터링 시스템 + 큐레이션 화이트리스트 ✅
-- 총 입력: 299개 en-ko 쌍 (241 자동 + 58 수동)
-- **Active 약제: 29개 (9.7%)** ← 주요 mAbs/kinase inhibitors 포함
-- Pending (음차 실패): 253개 (84.6%)
-- 큐레이션 화이트리스트: 56개 주요 약제 (bevacizumab, nivolumab, pembrolizumab 등)
-- 다음 단계: Pending 약제 검토 → 100+ Active 목표
+**항암제 사전 구축** (2025-10-31 Phase 1/4 완료):
+- **접근법 전환**: 음차 유사도 → 코드 기반 매칭 (ATC 코드)
+- **Ground Truth**: 약가 마스터 1.8M 레코드 → L01/L02 필터링
+- **Phase 1 완료** (브랜드명/성분명 정제):
+  - 항암제 추출: 154개 성분, 939개 브랜드명
+  - 브랜드명 정제: 939/939 성공 (100%)
+  - 한글 성분명 추출: 148/154 성공 (96.1%)
+  - 출력: `bridges/anticancer_master_clean.json`
+- **다음 단계**: Phase 2 (한글명 보완 + 염/기본형 분리) → Phase 3 (ATC 세분류) → Phase 4 (코드 기반 매칭)
+- **핵심 원칙**: 신뢰도 최우선, 정확 매칭만, 퍼지/유사도 금지
 
 **항암요법 데이터 파싱** (2025-10-30):
 - 공고책자 PDF: 264페이지 → 498KB 텍스트 (248개 테이블) ✅
 - 사전신청요법 엑셀: 659개 승인 요법 (구조화) ✅
 - 약제명 추출: 124개 영문 + 202개 한글
 - 치료 레짐: FOLFOX, FOLFIRI, R-CHOP, ABVD 등
-- 다음 단계: 구조화된 데이터 추출 → DB 구축
 
 **상세 정보**: [hira_cancer/README.md](hira_cancer/README.md)
 
@@ -319,6 +321,8 @@ python hira_cancer/view_parsed_samples.py
 ### 작업 계획서
 - [EMR 인증 계획](docs/plans/emrcert.md)
 - [HIRA 고시 계획](docs/plans/hira_rulesvc.md)
+- [항암제 사전 4-Phase 계획](docs/plans/anticancer_dictionary_phases.md) 🆕
+- [약물 매칭 마스터 플랜](docs/plans/drug_matching_master_plan.md)
 
 ### 작업 일지
 - [EMR 인증 일지](docs/journal/emrcert/)
@@ -374,9 +378,10 @@ python hira_cancer/view_parsed_samples.py
 | 2025-10-22 | 초기 스크래핑 | 구조 분석 완료 |
 | 2025-10-23 | 전체 수집 | 484개 게시글 + 828개 첨부파일 |
 | 2025-10-24 | 첨부파일 파싱 | 823개 파싱 완료 (4,948p, $49.48) |
-| 2025-10-30 | 약제 앵커 Pass-1/2 | Gate chain 필터링 (14 Active, 35 Pending) |
 | 2025-10-30 | 항암요법 데이터 파싱 | 공고책자 264p + 엑셀 659요법 완료 |
-| 2025-10-30 | 약제 앵커 Pass-3 | 큐레이션 화이트리스트 (29 Active, 56개 수동 매핑) |
+| 2025-10-31 | **접근법 전환** | 음차 유사도 → 코드 기반 (ATC) |
+| 2025-10-31 | 약가 마스터 분석 | 1.8M → 154개 항암제 추출 |
+| 2025-10-31 | Phase 1 완료 | 브랜드/성분명 정제 (939/154개) |
 
 ### NCC 암정보 사전
 | 날짜 | 작업 | 결과 |
@@ -388,12 +393,21 @@ python hira_cancer/view_parsed_samples.py
 
 ## 🚀 향후 계획
 
-### 전처리 파이프라인
-- [ ] Upstage Document Parse API 연동
-- [ ] HWP/PDF → Markdown/JSON 변환
-- [ ] 메타데이터 자동 태깅
+### 항암제 사전 구축 (Phase 2-4)
+- [x] **Phase 1**: 브랜드명/성분명 정제 (완료)
+- [ ] **Phase 2**: 한글 성분명 보완 + 염/기본형 분리
+  - 누락 6개 한글명 보완
+  - "아비라테론아세테이트" → 기본형 "아비라테론" + 염 "아세테이트"
+- [ ] **Phase 3**: ATC 기반 분류 강화
+  - L01/L02 세분류 (L01EA, L01EB, L01EF 등)
+  - 보조 약제 추가 (진토제, 골전이 치료제 등)
+- [ ] **Phase 4**: 코드 기반 매칭 구현
+  - 브랜드 인덱스 구축
+  - HIRA 텍스트 → ATC 코드 매핑 (정확 매칭만)
+  - 지식그래프 노드 생성
 
 ### 데이터 활용
+- [ ] 지식그래프 구축 (약제-질환-레짐 관계)
 - [ ] 벡터 데이터베이스 적재
 - [ ] RAG 시스템 구축
 - [ ] 검색 API 개발
@@ -424,7 +438,7 @@ python hira_cancer/view_parsed_samples.py
 
 ---
 
-**최종 업데이트**: 2025-10-30
+**최종 업데이트**: 2025-10-31
 **총 수집 데이터**: 9,991개 + 9,223페이지
 - EMR 인증: 4,214개
 - HIRA RULESVC: 56개
@@ -432,5 +446,11 @@ python hira_cancer/view_parsed_samples.py
 - HIRA 암질환: 484개 게시글 + 828개 첨부파일 (4,948p 파싱 완료)
 - LIKMS: 35개
 - NCC: 3,543개 (LLM 분류 완료, 평균 신뢰도 0.928)
+- **항암제 마스터**: 154개 성분 + 939개 브랜드명 (약가 마스터 정제 완료)
 
-**프로젝트 상태**: ✅ 수집 완료, 파싱 완료, LLM 분류 완료, RAG 시스템 구축 준비 중
+**프로젝트 상태**: ✅ 수집 완료, 파싱 완료, LLM 분류 완료, 항암제 사전 Phase 1/4 완료, 지식그래프 구축 준비 중
+
+**관련 문서**:
+- [항암제 사전 4-Phase 계획](docs/plans/anticancer_dictionary_phases.md)
+- [2025-10-31 작업 일지: 코드 기반 전환](docs/journal/hira_cancer/2025-10-31_code_based_pivot.md)
+- [지식그래프 로드맵](docs/knowledge_graph_roadmap.md)
