@@ -8,6 +8,7 @@
 import os
 import json
 import time
+import shutil
 from pathlib import Path
 from typing import List, Dict, Any
 import requests
@@ -230,9 +231,11 @@ class UpstageSplitParser:
             # 5. 임시 파일 정리
             if not keep_chunks:
                 print(f"\n[CLEANUP] Removing temporary chunks...")
-                for chunk_path in chunk_paths:
-                    chunk_path.unlink()
-                temp_dir.rmdir()
+                try:
+                    shutil.rmtree(temp_dir)
+                    print(f"  [OK] Cleaned up: {temp_dir}")
+                except Exception as e:
+                    print(f"  [WARNING] Cleanup failed: {e}")
             else:
                 print(f"\n[INFO] Chunks kept in: {temp_dir}")
 
