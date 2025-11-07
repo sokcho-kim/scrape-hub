@@ -1,6 +1,6 @@
 # Scrape Hub
 
-각종 스크래핑 프로젝트를 관리하는 통합 저장소입니다.
+각종 의료 데이터 수집 및 통합 프로젝트를 관리하는 통합 저장소입니다.
 
 ---
 
@@ -74,7 +74,7 @@
 
 ---
 
-### 5. [HIRA 암질환 사용약제 및 요법](hira_cancer/README.md) 🆕
+### 5. [HIRA 암질환 사용약제 및 요법](hira_cancer/README.md)
 
 건강보험심사평가원 암질환 게시판 데이터 수집 및 파싱
 
@@ -94,22 +94,15 @@
 - 출력 형식: Markdown + HTML
 - 출력 크기: 19.2 MB (JSON)
 
-**항암제 사전 구축** (2025-10-31 Phase 1/4 완료):
+**항암제 사전 구축** (Phase 1/4 완료):
 - **접근법 전환**: 음차 유사도 → 코드 기반 매칭 (ATC 코드)
 - **Ground Truth**: 약가 마스터 1.8M 레코드 → L01/L02 필터링
 - **Phase 1 완료** (브랜드명/성분명 정제):
   - 항암제 추출: 154개 성분, 939개 브랜드명
   - 브랜드명 정제: 939/939 성공 (100%)
   - 한글 성분명 추출: 148/154 성공 (96.1%)
-  - 출력: `bridges/anticancer_master_clean.json`
-- **다음 단계**: Phase 2 (한글명 보완 + 염/기본형 분리) → Phase 3 (ATC 세분류) → Phase 4 (코드 기반 매칭)
-- **핵심 원칙**: 신뢰도 최우선, 정확 매칭만, 퍼지/유사도 금지
-
-**항암요법 데이터 파싱** (2025-10-30):
-- 공고책자 PDF: 264페이지 → 498KB 텍스트 (248개 테이블) ✅
-- 사전신청요법 엑셀: 659개 승인 요법 (구조화) ✅
-- 약제명 추출: 124개 영문 + 202개 한글
-- 치료 레짐: FOLFOX, FOLFIRI, R-CHOP, ABVD 등
+  - ATC 분류: L01.A-X 상세 분류 완료
+  - 출력: `bridges/anticancer_master_classified.json`
 
 **상세 정보**: [hira_cancer/README.md](hira_cancer/README.md)
 
@@ -135,7 +128,7 @@
 
 ---
 
-### 7. [NCC 암정보 사전](ncc/README.md) 🆕
+### 7. [NCC 암정보 사전](ncc/README.md)
 
 국립암센터(NCC) 암정보 사전 수집 및 LLM 분류
 
@@ -155,6 +148,83 @@
 - 상태: ✅ 분류 완료 (100%)
 
 **상세 정보**: [ncc/README.md](ncc/README.md)
+
+---
+
+### 8. [HINS 바이오마커-검사 통합](docs/journal/) 🆕✨
+
+**한국보건의료정보원(HINS) SNOMED CT 매핑 데이터를 활용한 항암제-바이오마커-검사 통합 시스템**
+
+**데이터 출처**: https://hins.or.kr
+
+**프로젝트 개요**:
+- HINS EDI 검사 데이터와 항암제 사전 통합
+- LOINC/SNOMED CT 국제 표준 코드 기반 매칭
+- Neo4j 그래프 데이터베이스 통합 준비
+
+**데이터 현황** (2025-11-07 완료):
+- **바이오마커**: 23개 (v2.0, 항암제 + HINS 통합)
+  - 항암제 기반: 17개
+  - HINS 추가 발견: 6개 (KRAS, FLT3, IDH1/2, BRCA1/2)
+- **검사**: 575개 (SNOMED CT 93.9% 매칭)
+- **항암제**: 154개
+- **바이오마커-검사 관계**: 996개
+- **약물-바이오마커 관계**: 55개
+
+**핵심 성과**:
+- ✅ **LOINC/SNOMED CT 코드 기반 매칭** (업계 모범 사례)
+- ✅ **3단계 매칭 전략**: LOINC (1순위) → SNOMED CT (2순위) → 키워드 (백업)
+- ✅ **다층 데이터 소스 통합**: 항암제 사전 + HINS 검사
+- ✅ **표준 코드 커버리지**: SNOMED CT 94.4%, LOINC 44.9%
+
+**4-Phase 파이프라인**:
+
+| Phase | 작업 | 출력 | 상태 |
+|-------|------|------|------|
+| **Phase 1** | 바이오마커 추출 (v2.0) | 23개 바이오마커 | ✅ 완료 |
+| **Phase 2** | HINS 검사 파싱 (코드 기반) | 575개 검사 | ✅ 완료 |
+| **Phase 3** | 바이오마커-검사 매핑 | 996개 관계 | ✅ 완료 |
+| **Phase 4** | Neo4j 통합 | 그래프 DB | ✅ 스크립트 준비 |
+
+**스크립트**:
+```
+scripts/
+├── extract_biomarkers_from_drugs.py      # Phase 1 v1.0 (항암제만, 17개)
+├── extract_biomarkers_from_drugs_v2.py   # Phase 1 v2.0 (통합, 23개) ⭐
+├── parse_hins_biomarker_tests.py         # Phase 2 (LOINC/SNOMED CT) ⭐
+├── map_biomarkers_to_tests.py            # Phase 3
+└── (integrate_to_neo4j.py → neo4j/)      # Phase 4 (이동됨)
+```
+
+**Neo4j 구조**:
+```
+neo4j/
+├── scripts/
+│   └── integrate_to_neo4j.py            # 통합 스크립트
+├── queries/
+│   └── sample_queries.cypher            # 샘플 쿼리 모음
+└── README.md                            # Neo4j 가이드
+```
+
+**데이터 파일**:
+```
+bridges/
+├── biomarkers_extracted.json            # 17개 (v1.0)
+├── biomarkers_extracted_v2.json         # 23개 (v2.0) ⭐
+└── biomarker_test_mappings.json         # 996개 관계
+
+data/hins/parsed/
+└── biomarker_tests_structured.json      # 575개 검사
+```
+
+**문서**:
+- [통합 계획서](docs/journal/2025-11-07_hins_integration_plan.md)
+- [Phase 1-2 실행 보고서](docs/journal/2025-11-07_phase1-2_execution_report.md)
+- [최종 완료 보고서](docs/journal/2025-11-07_hins_integration_complete.md)
+- [Phase 1 버전 비교](docs/journal/2025-11-07_phase1_version_comparison.md)
+- [작업 일지](docs/journal/2025-11-07_daily_report.md)
+
+**상태**: ✅ Phase 1-4 완료, Neo4j 실행 대기
 
 ---
 
@@ -193,30 +263,50 @@ scrape-hub/
 │   ├── parsers/                  # PDF/Excel 파싱
 │   └── README.md                 # 프로젝트 문서
 │
-├── shared/                       # 공유 모듈
-│   └── parsers.py                # 공통 파서 (Upstage API)
+├── ncc/                          # NCC 암정보 사전
+│   ├── scraper.py                # 용어 사전 수집
+│   ├── classify_llm.py           # LLM 기반 분류
+│   └── README.md                 # 프로젝트 문서
+│
+├── scripts/                      # 통합 스크립트 ⭐
+│   ├── extract_biomarkers_from_drugs.py        # Phase 1 v1.0
+│   ├── extract_biomarkers_from_drugs_v2.py     # Phase 1 v2.0
+│   ├── parse_hins_biomarker_tests.py           # Phase 2
+│   └── map_biomarkers_to_tests.py              # Phase 3
+│
+├── neo4j/                        # Neo4j 그래프 DB ⭐
+│   ├── scripts/
+│   │   └── integrate_to_neo4j.py               # Phase 4 통합
+│   ├── queries/
+│   │   └── sample_queries.cypher               # 샘플 쿼리
+│   └── README.md                               # Neo4j 가이드
+│
+├── bridges/                      # 통합 데이터 ⭐
+│   ├── anticancer_master_classified.json       # 154개 항암제
+│   ├── biomarkers_extracted.json               # 17개 (v1.0)
+│   ├── biomarkers_extracted_v2.json            # 23개 (v2.0)
+│   └── biomarker_test_mappings.json            # 996개 관계
 │
 ├── data/                         # 수집된 데이터 (프로젝트별)
 │   ├── emrcert/                  # EMR 데이터 (CSV)
 │   ├── hira_rulesvc/             # HIRA RULESVC 데이터 (HWP/PDF)
 │   ├── hira/                     # HIRA 전자책 (PDF)
 │   ├── hira_cancer/              # HIRA 암질환 데이터
-│   │   ├── raw/                  # 원본 게시글 + 첨부파일 (HWP/PDF)
-│   │   ├── parsed/               # 파싱된 Markdown + HTML (JSON)
-│   │   └── parsed_preview/       # 텍스트 미리보기
+│   ├── hins/                     # HINS 데이터 ⭐
+│   │   ├── downloads/            # 원본 Excel
+│   │   └── parsed/               # 파싱된 JSON (575개 검사)
 │   ├── likms/                    # LIKMS 데이터 (TXT/JSON)
+│   ├── ncc/                      # NCC 데이터 (JSON)
 │   └── pharma/                   # Pharma 데이터
-│
-├── logs/                         # 실행 로그 (프로젝트별)
-│   ├── emrcert/
-│   ├── hira_rulesvc/
-│   ├── hira/
-│   ├── hira_cancer/
-│   └── likms/
 │
 ├── docs/                         # 프로젝트 문서
 │   ├── plans/                    # 작업 계획서
 │   ├── journal/                  # 작업 일지 (프로젝트별)
+│   │   ├── 2025-11-07_hins_integration_plan.md           ⭐
+│   │   ├── 2025-11-07_phase1-2_execution_report.md       ⭐
+│   │   ├── 2025-11-07_hins_integration_complete.md       ⭐
+│   │   ├── 2025-11-07_phase1_version_comparison.md       ⭐
+│   │   └── 2025-11-07_daily_report.md                    ⭐
 │   └── samples/                  # 샘플 데이터
 │
 └── README.md                     # 이 파일
@@ -239,51 +329,51 @@ uv venv scraphub
 source scraphub/bin/activate
 
 # 패키지 설치
-uv pip install playwright beautifulsoup4
+uv pip install playwright beautifulsoup4 pandas
 
 # Playwright 브라우저 설치
 playwright install chromium
 ```
 
-### 2. 크롤러 실행
+### 2. 주요 스크립트 실행
 
-#### EMR 인증 크롤러
+#### Phase 1: 바이오마커 추출
 ```bash
-# 제품인증 수집
-python -m emrcert.scrapers.product_certification
+# v1.0 (항암제만, 17개)
+python scripts/extract_biomarkers_from_drugs.py
 
-# 사용인증 수집
-python -m emrcert.scrapers.usage_certification
+# v2.0 (항암제 + HINS, 23개) - 권장
+python scripts/extract_biomarkers_from_drugs_v2.py
 ```
 
-#### HIRA 고시 문서 크롤러
+#### Phase 2: HINS 검사 파싱
 ```bash
-# 전체 문서 수집
-python -m hira_rulesvc.scrapers.law_scraper_v3
+# LOINC/SNOMED CT 코드 기반 (575개)
+python scripts/parse_hins_biomarker_tests.py
 ```
 
-#### HIRA 전자책 크롤러
+#### Phase 3: 바이오마커-검사 매핑
 ```bash
-# PDF 품질 분석 (Phase 1)
-python hira/analyze_ebooks.py
+# 996개 관계 생성
+python scripts/map_biomarkers_to_tests.py
 ```
 
-#### LIKMS 법령 크롤러
+#### Phase 4: Neo4j 통합
 ```bash
-# 대법원 포털에서 법령 수집
-python likms/scrapers/scourt_direct.py
+# 데이터 검증 (Neo4j 없이)
+python neo4j/scripts/integrate_to_neo4j.py --skip-neo4j
+
+# Neo4j 통합 (기존 데이터 삭제)
+python neo4j/scripts/integrate_to_neo4j.py --clear-db
 ```
 
-#### HIRA 암질환 사용약제 크롤러
+#### HIRA 암질환 사용약제
 ```bash
 # 게시글 + 첨부파일 수집
 python hira_cancer/scraper.py
 
 # 첨부파일 파싱 (Upstage API)
 python hira_cancer/parse_attachments.py --all
-
-# 샘플 확인
-python hira_cancer/view_parsed_samples.py
 ```
 
 ---
@@ -304,7 +394,10 @@ python hira_cancer/view_parsed_samples.py
 | **LIKMS** | 법령 텍스트 | 35개 | TXT/JSON | ✅ 완료 |
 | **NCC** | 암 용어 사전 | 3,543개 | JSON | ✅ 수집 완료 |
 | **NCC** | LLM 분류 | 3,543개 | JSON | ✅ 분류 완료 |
-| **합계** | - | **9,991개** | - | ✅ 수집 완료 |
+| **HINS** | 바이오마커 | 23개 | JSON | ✅ 완료 (v2.0) |
+| **HINS** | 검사 | 575개 | JSON | ✅ 완료 |
+| **HINS** | 바이오마커-검사 관계 | 996개 | JSON | ✅ 완료 |
+| **합계** | - | **11,585개** | - | ✅ 수집 완료 |
 
 ---
 
@@ -317,20 +410,20 @@ python hira_cancer/view_parsed_samples.py
 - [HIRA 암질환 사용약제](hira_cancer/README.md)
 - [LIKMS 법령 크롤러](likms/README.md)
 - [NCC 암정보 사전](ncc/README.md)
+- [Neo4j 그래프 데이터베이스](neo4j/README.md) ⭐
+
+### HINS 바이오마커-검사 통합
+- [통합 계획서](docs/journal/2025-11-07_hins_integration_plan.md)
+- [Phase 1-2 실행 보고서](docs/journal/2025-11-07_phase1-2_execution_report.md)
+- [최종 완료 보고서](docs/journal/2025-11-07_hins_integration_complete.md)
+- [Phase 1 버전 비교](docs/journal/2025-11-07_phase1_version_comparison.md)
+- [작업 일지](docs/journal/2025-11-07_daily_report.md)
 
 ### 작업 계획서
 - [EMR 인증 계획](docs/plans/emrcert.md)
 - [HIRA 고시 계획](docs/plans/hira_rulesvc.md)
-- [항암제 사전 4-Phase 계획](docs/plans/anticancer_dictionary_phases.md) 🆕
+- [항암제 사전 4-Phase 계획](docs/plans/anticancer_dictionary_phases.md)
 - [약물 매칭 마스터 플랜](docs/plans/drug_matching_master_plan.md)
-
-### 작업 일지
-- [EMR 인증 일지](docs/journal/emrcert/)
-- [HIRA 급여기준 시스템 일지](docs/journal/hira_rulesvc/)
-- [HIRA 전자책 일지](docs/journal/hira/)
-- [HIRA 암질환 일지](docs/journal/hira_cancer/)
-- [LIKMS 법령 일지](docs/journal/likms/)
-- [NCC 암정보 사전 일지](docs/journal/ncc/)
 
 ---
 
@@ -338,76 +431,30 @@ python hira_cancer/view_parsed_samples.py
 
 | 항목 | 기술 |
 |------|------|
-| 언어 | Python 3.x |
+| 언어 | Python 3.13 |
 | 브라우저 자동화 | Playwright |
 | HTML 파싱 | BeautifulSoup4 |
-| 데이터 저장 | CSV, HWP, PDF |
+| 데이터 처리 | Pandas, JSON |
+| 표준 코드 | LOINC, SNOMED CT, ATC |
+| 그래프 DB | Neo4j |
 | 패키지 관리 | uv |
-
----
-
-## 🔄 프로젝트 타임라인
-
-### EMR 인증 크롤러
-| 날짜 | 작업 | 결과 |
-|------|------|------|
-| 2025-10-11 | HTML 파싱 버그 수정 | 필드 누락 문제 해결 |
-| 2025-10-13 | 전체 데이터 재수집 | 4,214개 수집 완료 |
-
-### HIRA 급여기준 시스템
-| 날짜 | 작업 | 결과 |
-|------|------|------|
-| 2025-10-13 | 초기 탐색 및 구조 분석 | 트리 구조 파싱 |
-| 2025-10-14 | V2 개발 (SEQ 방식) | 실패, 재설계 |
-| 2025-10-16 | V3 완성 (폴더 방식) | 53개 자동 수집 |
-| 2025-10-17 | 최종 완료 | 56개 수집 완료 (100%) |
-
-### HIRA 전자책
-| 날짜 | 작업 | 결과 |
-|------|------|------|
-| 2025-10-20 | PDF 수집 및 품질 분석 계획 | 8개 PDF (4,275p) 수집 완료 |
-
-### LIKMS 법령 크롤러
-| 날짜 | 작업 | 결과 |
-|------|------|------|
-| 2025-10-20 | 의료 관련 법령 수집 | 35개 법령 수집 완료 |
-
-### HIRA 암질환 사용약제
-| 날짜 | 작업 | 결과 |
-|------|------|------|
-| 2025-10-22 | 초기 스크래핑 | 구조 분석 완료 |
-| 2025-10-23 | 전체 수집 | 484개 게시글 + 828개 첨부파일 |
-| 2025-10-24 | 첨부파일 파싱 | 823개 파싱 완료 (4,948p, $49.48) |
-| 2025-10-30 | 항암요법 데이터 파싱 | 공고책자 264p + 엑셀 659요법 완료 |
-| 2025-10-31 | **접근법 전환** | 음차 유사도 → 코드 기반 (ATC) |
-| 2025-10-31 | 약가 마스터 분석 | 1.8M → 154개 항암제 추출 |
-| 2025-10-31 | Phase 1 완료 | 브랜드/성분명 정제 (939/154개) |
-
-### NCC 암정보 사전
-| 날짜 | 작업 | 결과 |
-|------|------|------|
-| 2025-10-29 | 전체 수집 | 3,543개 용어 수집 완료 (9분) |
-| 2025-10-30 | LLM 분류 | 3가지 방식 비교 및 완료 (2시간 15분, $1.06) |
 
 ---
 
 ## 🚀 향후 계획
 
-### 항암제 사전 구축 (Phase 2-4)
-- [x] **Phase 1**: 브랜드명/성분명 정제 (완료)
-- [ ] **Phase 2**: 한글 성분명 보완 + 염/기본형 분리
-  - 누락 6개 한글명 보완
-  - "아비라테론아세테이트" → 기본형 "아비라테론" + 염 "아세테이트"
-- [ ] **Phase 3**: ATC 기반 분류 강화
-  - L01/L02 세분류 (L01EA, L01EB, L01EF 등)
-  - 보조 약제 추가 (진토제, 골전이 치료제 등)
-- [ ] **Phase 4**: 코드 기반 매칭 구현
-  - 브랜드 인덱스 구축
-  - HIRA 텍스트 → ATC 코드 매핑 (정확 매칭만)
-  - 지식그래프 노드 생성
+### Neo4j 그래프 데이터베이스 (2025-11-08)
+- [ ] Neo4j 실행 및 데이터 통합
+- [ ] 샘플 쿼리 테스트
+- [ ] 그래프 시각화
 
-### 데이터 활용
-- [ ] 지식그래프 구축 (약제-질환-레짐 관계)
+### 데이터 확장
+- [ ] 추가 바이오마커 패턴 정의
+- [ ] HINS 다른 데이터셋 탐색
+- [ ] 약가 데이터 연동
+
+### 지식그래프 구축
+- [ ] 약제-질환-레짐 관계 구축
 - [ ] 벡터 데이터베이스 적재
 - [ ] RAG 시스템 구축
 - [ ] 검색 API 개발
@@ -435,22 +482,24 @@ python hira_cancer/view_parsed_samples.py
 - HIRA 전자책: 건강보험심사평가원 전자책 (https://www.hira.or.kr/ra/ebook)
 - HIRA 암질환: 건강보험심사평가원 암질환 게시판 (https://www.hira.or.kr/bbsDummy.do?pgmid=HIRAA030069000000)
 - LIKMS: 대법원 사법정보공개포털 (https://portal.scourt.go.kr/pgp)
+- NCC: 국립암센터 암정보 사전 (https://www.cancer.go.kr)
+- HINS: 한국보건의료정보원 (https://hins.or.kr) ⭐
 
 ---
 
-**최종 업데이트**: 2025-10-31
-**총 수집 데이터**: 9,991개 + 9,223페이지
-- EMR 인증: 4,214개
-- HIRA RULESVC: 56개
-- HIRA 전자책: 8개 (4,275p)
-- HIRA 암질환: 484개 게시글 + 828개 첨부파일 (4,948p 파싱 완료)
-- LIKMS: 35개
-- NCC: 3,543개 (LLM 분류 완료, 평균 신뢰도 0.928)
-- **항암제 마스터**: 154개 성분 + 939개 브랜드명 (약가 마스터 정제 완료)
+**최종 업데이트**: 2025-11-07
+**총 수집 데이터**: 11,585개 + 9,223페이지
 
-**프로젝트 상태**: ✅ 수집 완료, 파싱 완료, LLM 분류 완료, 항암제 사전 Phase 1/4 완료, 지식그래프 구축 준비 중
+**프로젝트 현황**:
+- EMR 인증: 4,214개 ✅
+- HIRA RULESVC: 56개 ✅
+- HIRA 전자책: 8개 (4,275p) ✅
+- HIRA 암질환: 484개 게시글 + 828개 첨부파일 (4,948p) ✅
+- LIKMS: 35개 ✅
+- NCC: 3,543개 (LLM 분류 완료, 평균 신뢰도 0.928) ✅
+- **항암제 마스터**: 154개 성분 + 939개 브랜드명 ✅
+- **HINS 바이오마커**: 23개 (v2.0, 항암제 + HINS 통합) ✅
+- **HINS 검사**: 575개 (SNOMED CT 93.9% 매칭) ✅
+- **바이오마커-검사 관계**: 996개 ✅
 
-**관련 문서**:
-- [항암제 사전 4-Phase 계획](docs/plans/anticancer_dictionary_phases.md)
-- [2025-10-31 작업 일지: 코드 기반 전환](docs/journal/hira_cancer/2025-10-31_code_based_pivot.md)
-- [지식그래프 로드맵](docs/knowledge_graph_roadmap.md)
+**프로젝트 상태**: ✅ 데이터 수집 완료, HINS 통합 완료, Neo4j 준비 완료

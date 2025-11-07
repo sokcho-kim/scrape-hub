@@ -1,0 +1,9 @@
+# Neo4j Python Driver
+neo4j>=5.14.0
+
+# Environment variables
+python-dotenv>=1.0.0
+
+# For future use (Week 2+)
+# sentence-transformers>=2.2.0  # For embeddings (Week 5)
+# anthropic>=0.7.0              # For Claude API (Week 3-4)
