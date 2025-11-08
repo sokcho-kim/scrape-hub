@@ -111,95 +111,220 @@ neo4j/
 
 ---
 
-## 🚀 실행 방법
+## 🚀 완전 실행 가이드
 
-### 1. 사전 준비
+### Step 1: 환경 설정 (.env 파일)
 
-#### Option A: Docker로 Neo4j 실행 (권장)
+프로젝트 루트에 `.env` 파일이 있는지 확인하세요. 없다면 생성하세요.
+
+**파일 위치**: `C:\Jimin\scrape-hub\.env`
+
+```env
+# Neo4j Configuration
+NEO4J_URI=neo4j://127.0.0.1:7687
+NEO4J_USER=neo4j
+NEO4J_PASSWORD=your_password_here
+NEO4J_DATABASE=mediclaim-kg
+```
+
+⚠️ **중요**: `.env` 파일의 비밀번호는 나중에 Docker 컨테이너 실행 시 사용하는 비밀번호와 **반드시 동일**해야 합니다!
+
+### Step 2: Docker Desktop 실행
+
+1. Docker Desktop을 실행하세요
+2. Docker가 정상적으로 실행되었는지 확인:
+   ```bash
+   docker ps
+   ```
+
+### Step 3: Neo4j 컨테이너 실행
+
 ```bash
-# Neo4j 컨테이너 실행
+# Neo4j 컨테이너 실행 (.env 파일의 비밀번호와 동일하게!)
 docker run -d \
   --name neo4j \
   -p 7474:7474 -p 7687:7687 \
-  -e NEO4J_AUTH=neo4j/password \
+  -e NEO4J_AUTH=neo4j/your_password_here \
   neo4j:latest
-
-# 상태 확인
-docker ps
 ```
 
-#### Option B: Neo4j Desktop 설치
-1. https://neo4j.com/download/ 에서 Neo4j Desktop 다운로드
-2. 새 데이터베이스 생성
-3. 데이터베이스 시작
+**Windows PowerShell의 경우**:
+```powershell
+docker run -d --name neo4j -p 7474:7474 -p 7687:7687 -e NEO4J_AUTH=neo4j/your_password_here neo4j:latest
+```
 
-### 2. Python 환경 설정
+#### 컨테이너 상태 확인
 
 ```bash
-# 의존성 설치
+# 컨테이너가 실행 중인지 확인
+docker ps | grep neo4j
+
+# 로그 확인 (Neo4j가 완전히 시작될 때까지 대기)
+docker logs neo4j
+
+# "Started" 메시지가 나올 때까지 기다리세요
+```
+
+### Step 4: Python 패키지 설치
+
+```bash
+# neo4j 패키지 설치
+pip install neo4j python-dotenv
+
+# 또는 requirements.txt 사용
 cd neo4j/scripts
 pip install -r requirements.txt
-
-# 또는 직접 설치
-pip install neo4j
+cd ../..
 ```
 
-### 3. 환경 변수 설정
+### Step 5: Neo4j 연결 테스트
 
 ```bash
-# Windows (PowerShell)
-$env:NEO4J_URI="bolt://localhost:7687"
-$env:NEO4J_USER="neo4j"
-$env:NEO4J_PASSWORD="password"
-
-# Linux/Mac
-export NEO4J_URI="bolt://localhost:7687"
-export NEO4J_USER="neo4j"
-export NEO4J_PASSWORD="password"
+# 프로젝트 루트에서 실행
+python neo4j/scripts/test_connection.py
 ```
 
-### 4. 데이터 통합 실행
+**예상 출력**:
+```
+[SUCCESS] Connection successful!
+  Neo4j Kernel: 2025.10.1
+  Cypher: 5
 
-#### 데이터 검증 (Neo4j 없이)
-```bash
-cd ../..  # 프로젝트 루트로
-python neo4j/scripts/integrate_to_neo4j.py --skip-neo4j
+[OK] Neo4j is ready!
 ```
 
-#### 실제 통합 (기존 데이터 삭제)
+❌ **인증 오류가 발생하면**:
+- `.env` 파일의 `NEO4J_PASSWORD`와 Docker 컨테이너의 비밀번호가 일치하는지 확인
+- 컨테이너를 삭제하고 다시 실행:
+  ```bash
+  docker stop neo4j && docker rm neo4j
+  # 그리고 Step 3부터 다시 시작
+  ```
+
+### Step 6: 데이터 통합 실행
+
 ```bash
+# 프로젝트 루트에서 실행
 python neo4j/scripts/integrate_to_neo4j.py --clear-db
 ```
 
-#### 실제 통합 (기존 데이터 유지)
-```bash
-python neo4j/scripts/integrate_to_neo4j.py
+**실행 시간**: 약 10-30초
+
+**예상 출력**:
+```
+======================================================================
+Phase 4: Neo4j 통합
+======================================================================
+
+[INFO] 데이터 파일 로드...
+[OK] 모든 데이터 파일 로드 완료
+[WARN] 기존 데이터 삭제 중...
+[OK] 데이터베이스 초기화 완료
+
+[INFO] 제약조건 및 인덱스 생성 중...
+[OK] 제약조건 및 인덱스 생성 완료
+
+[INFO] 바이오마커 노드 생성 중...
+[OK] 17개 바이오마커 노드 생성
+
+[INFO] 검사 노드 생성 중...
+[OK] 575개 검사 노드 생성
+
+[INFO] 항암제 노드 생성 중...
+[WARN] 중복된 ATC 코드 16개 제거됨
+[OK] 138개 항암제 노드 생성
+
+[INFO] 바이오마커-검사 관계 생성 중...
+[OK] 996개 TESTED_BY 관계 생성
+
+[INFO] 약물-바이오마커 관계 생성 중...
+[OK] 71개 TARGETS 관계 생성
+
+[VERIFY] Neo4j 데이터베이스 현황:
+  - biomarkers: 17개
+  - tests: 575개
+  - drugs: 138개
+  - tested_by: 996개
+  - targets: 71개
+
+[SUCCESS] Neo4j 통합 완료!
 ```
 
-### 5. Neo4j Browser 접속
+### Step 7: Neo4j Browser에서 확인
 
-```
-http://localhost:7474
-```
+1. 브라우저에서 접속: **http://localhost:7474**
 
-**로그인 정보**:
-- Username: `neo4j`
-- Password: `password`
+2. 로그인:
+   - **Username**: `neo4j`
+   - **Password**: `.env` 파일에 설정한 비밀번호
+
+3. 첫 번째 쿼리 실행:
+   ```cypher
+   MATCH (n)
+   RETURN labels(n) as NodeType, count(n) as Count
+   ORDER BY Count DESC
+   ```
+
+**예상 결과**:
+```
+┌──────────────┬───────┐
+│ NodeType     │ Count │
+├──────────────┼───────┤
+│ ["Test"]     │ 575   │
+│ ["Drug"]     │ 138   │
+│ ["Biomarker"]│  17   │
+└──────────────┴───────┘
+```
 
 ---
 
-## 📊 데이터 현황
+## ✅ 빠른 체크리스트
+
+실행 전 확인 사항:
+
+- [ ] Docker Desktop 실행됨
+- [ ] `.env` 파일 존재 (Neo4j 설정 포함)
+- [ ] Neo4j 컨테이너 실행 중 (`docker ps | grep neo4j`)
+- [ ] Neo4j 완전히 시작됨 (`docker logs neo4j` - "Started" 확인)
+- [ ] Python 패키지 설치됨 (`neo4j`, `python-dotenv`)
+- [ ] 연결 테스트 성공 (`test_connection.py`)
+
+---
+
+## 🔄 재실행 방법
+
+이미 데이터를 통합했고, 다시 실행하고 싶다면:
+
+```bash
+# 기존 데이터 삭제하고 재통합
+python neo4j/scripts/integrate_to_neo4j.py --clear-db
+
+# 또는 Neo4j 컨테이너를 완전히 재시작
+docker stop neo4j
+docker rm neo4j
+# 그리고 Step 3부터 다시 시작
+```
+
+---
+
+## 📊 데이터 현황 (2025-11-08 통합 완료)
 
 | 노드/관계 | 개수 | 설명 |
 |-----------|------|------|
 | **Biomarker** | 17개 | 항암제 관련 바이오마커 |
-| **Test** | 575개 | HINS EDI 검사 |
-| **Drug** | 154개 | 항암제 |
+| **Test** | 575개 | HINS EDI 검사 (SNOMED CT 94% 매칭) |
+| **Drug** | 138개 | 항암제 (중복 16개 제거) |
 | **TESTED_BY** | 996개 | 바이오마커-검사 관계 |
-| **TARGETS** | 55개 | 약물-바이오마커 관계 |
+| **TARGETS** | 71개 | 약물-바이오마커 관계 |
 
-**총 노드**: 746개
-**총 관계**: 1,051개
+**총 노드**: 730개
+**총 관계**: 1,067개
+
+**데이터 소스**:
+- 항암제: `bridges/anticancer_master_classified.json` (154개 → 138개 unique)
+- 바이오마커: `bridges/biomarkers_extracted.json` (v1.0, 17개)
+- 검사: `data/hins/parsed/biomarker_tests_structured.json` (575개)
+- 매핑: `bridges/biomarker_test_mappings.json` (996개 관계)
 
 ---
 
@@ -294,25 +419,88 @@ LIMIT 10;
 
 ## 🔧 문제 해결
 
-### 연결 실패
-```bash
-# Neo4j 상태 확인
-docker ps | grep neo4j
+### ❌ 인증 오류 (Authentication Failed)
 
-# 로그 확인
+**문제**: `The client is unauthorized due to authentication failure`
+
+**원인**: `.env` 파일의 비밀번호와 Docker 컨테이너 비밀번호 불일치
+
+**해결**:
+```bash
+# 1. 컨테이너 삭제
+docker stop neo4j
+docker rm neo4j
+
+# 2. .env 파일의 비밀번호 확인
+cat .env | grep NEO4J_PASSWORD
+
+# 3. 동일한 비밀번호로 컨테이너 재실행
+docker run -d --name neo4j -p 7474:7474 -p 7687:7687 \
+  -e NEO4J_AUTH=neo4j/your_actual_password \
+  neo4j:latest
+
+# 4. 연결 테스트
+python neo4j/scripts/test_connection.py
+```
+
+### ❌ 파일 경로 오류 (FileNotFoundError)
+
+**문제**: `No such file or directory: 'C:\...\anticancer_master_classified.json'`
+
+**원인**: 스크립트를 잘못된 위치에서 실행
+
+**해결**:
+```bash
+# 반드시 프로젝트 루트에서 실행
+cd C:\Jimin\scrape-hub
+python neo4j/scripts/integrate_to_neo4j.py --clear-db
+```
+
+### ❌ 중복 키 오류 (ConstraintError)
+
+**문제**: `Node already exists with label 'Drug' and property 'atc_code'`
+
+**원인**: 데이터에 중복된 ATC 코드 존재
+
+**해결**: 이미 수정됨 (2025-11-08)
+- `integrate_to_neo4j.py`가 자동으로 중복 제거
+- 16개 중복 ATC 코드는 자동으로 필터링됨
+
+### ❌ Neo4j 컨테이너 실행 안 됨
+
+**문제**: Docker 컨테이너가 시작되지 않음
+
+**확인**:
+```bash
+# Docker Desktop이 실행 중인지 확인
+docker ps
+
+# Neo4j 로그 확인
 docker logs neo4j
+
+# 포트 충돌 확인
+netstat -ano | findstr :7474
+netstat -ano | findstr :7687
+```
+
+**해결**:
+```bash
+# 포트가 이미 사용 중이면 다른 포트 사용
+docker run -d --name neo4j \
+  -p 7475:7474 -p 7688:7687 \
+  -e NEO4J_AUTH=neo4j/password \
+  neo4j:latest
 ```
 
 ### 느린 쿼리
-- 제약조건 및 인덱스 확인
+- 제약조건 및 인덱스 확인: `SHOW INDEXES;`
 - `EXPLAIN` 또는 `PROFILE` 사용
 - 필요시 추가 인덱스 생성
 
 ### 메모리 부족
 ```bash
 # Docker 메모리 할당 증가
-docker run -d \
-  --name neo4j \
+docker run -d --name neo4j \
   -p 7474:7474 -p 7687:7687 \
   -e NEO4J_AUTH=neo4j/password \
   -e NEO4J_server_memory_heap_initial__size=1G \
@@ -345,5 +533,19 @@ docker run -d \
 
 ---
 
-**마지막 업데이트**: 2025-11-07
-**버전**: 1.0
+**마지막 업데이트**: 2025-11-08
+**버전**: 1.1 (실행 가이드 완성, 문제 해결 추가)
+
+## 🎯 변경 이력
+
+### v1.1 (2025-11-08)
+- ✅ 완전 실행 가이드 추가 (Step 1-7)
+- ✅ `.env` 파일 기반 설정으로 변경
+- ✅ 문제 해결 섹션 확장 (실제 경험 기반)
+- ✅ 데이터 현황 업데이트 (730개 노드, 1,067개 관계)
+- ✅ 중복 ATC 코드 처리 (16개 제거)
+- ✅ 빠른 체크리스트 추가
+
+### v1.0 (2025-11-07)
+- 초기 문서 작성
+- 기본 스키마 및 쿼리 정의

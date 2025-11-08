@@ -335,7 +335,42 @@ uv pip install playwright beautifulsoup4 pandas
 playwright install chromium
 ```
 
-### 2. 주요 스크립트 실행
+### 2. Neo4j 그래프 데이터베이스 실행 ⭐ (추천)
+
+**전체 과정 약 5분 소요**
+
+```bash
+# Step 1: Docker Desktop 실행 확인
+docker ps
+
+# Step 2: Neo4j 컨테이너 시작 (.env 파일의 비밀번호 사용)
+docker run -d --name neo4j -p 7474:7474 -p 7687:7687 \
+  -e NEO4J_AUTH=neo4j/your_password_here neo4j:latest
+
+# Step 3: Neo4j 시작 대기 (약 10초)
+timeout 30 bash -c "until docker logs neo4j 2>&1 | grep -q 'Started'; do sleep 1; done"
+
+# Step 4: Python 패키지 설치
+pip install neo4j python-dotenv
+
+# Step 5: 연결 테스트
+python neo4j/scripts/test_connection.py
+
+# Step 6: 데이터 통합 (약 15초)
+python neo4j/scripts/integrate_to_neo4j.py --clear-db
+
+# Step 7: 브라우저에서 확인
+# http://localhost:7474 접속
+# Username: neo4j, Password: .env 파일의 비밀번호
+```
+
+**결과**: 730개 노드, 1,067개 관계
+
+**자세한 가이드**: [neo4j/README.md](neo4j/README.md)
+
+---
+
+### 3. 주요 스크립트 실행
 
 #### Phase 1: 바이오마커 추출
 ```bash
@@ -443,10 +478,12 @@ python hira_cancer/parse_attachments.py --all
 
 ## 🚀 향후 계획
 
-### Neo4j 그래프 데이터베이스 (2025-11-08)
-- [ ] Neo4j 실행 및 데이터 통합
-- [ ] 샘플 쿼리 테스트
-- [ ] 그래프 시각화
+### Neo4j 그래프 데이터베이스 ✅ 완료 (2025-11-08)
+- [x] Neo4j 실행 및 데이터 통합 (730개 노드, 1,067개 관계)
+- [x] 샘플 쿼리 테스트
+- [x] 실행 가이드 문서화 완료
+- [ ] 그래프 시각화 및 분석
+- [ ] v2.0 바이오마커 (23개) 통합
 
 ### 데이터 확장
 - [ ] 추가 바이오마커 패턴 정의
@@ -487,7 +524,7 @@ python hira_cancer/parse_attachments.py --all
 
 ---
 
-**최종 업데이트**: 2025-11-07
+**최종 업데이트**: 2025-11-08
 **총 수집 데이터**: 11,585개 + 9,223페이지
 
 **프로젝트 현황**:
@@ -501,5 +538,6 @@ python hira_cancer/parse_attachments.py --all
 - **HINS 바이오마커**: 23개 (v2.0, 항암제 + HINS 통합) ✅
 - **HINS 검사**: 575개 (SNOMED CT 93.9% 매칭) ✅
 - **바이오마커-검사 관계**: 996개 ✅
+- **Neo4j 그래프 DB**: 730개 노드, 1,067개 관계 ✅ (2025-11-08 통합 완료)
 
-**프로젝트 상태**: ✅ 데이터 수집 완료, HINS 통합 완료, Neo4j 준비 완료
+**프로젝트 상태**: ✅ 데이터 수집 완료, HINS 통합 완료, **Neo4j 그래프 DB 통합 완료**

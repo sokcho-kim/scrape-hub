@@ -18,10 +18,11 @@ from pathlib import Path
 from datetime import datetime
 from neo4j import GraphDatabase
 import os
+from dotenv import load_dotenv
 
 
 # 경로 설정
-PROJECT_ROOT = Path(__file__).parent.parent
+PROJECT_ROOT = Path(__file__).parent.parent.parent  # neo4j/scripts/ -> scrape-hub/
 BRIDGES_DIR = PROJECT_ROOT / "bridges"
 DATA_DIR = PROJECT_ROOT / "data" / "hins" / "parsed"
 
@@ -29,6 +30,9 @@ INPUT_DRUGS = BRIDGES_DIR / "anticancer_master_classified.json"
 INPUT_BIOMARKERS = BRIDGES_DIR / "biomarkers_extracted.json"
 INPUT_TESTS = DATA_DIR / "biomarker_tests_structured.json"
 INPUT_MAPPINGS = BRIDGES_DIR / "biomarker_test_mappings.json"
+
+# .env 파일 로드
+load_dotenv(PROJECT_ROOT / ".env")
 
 # Neo4j 연결 정보 (환경변수 또는 기본값)
 NEO4J_URI = os.getenv("NEO4J_URI", "bolt://localhost:7687")
@@ -153,7 +157,23 @@ class Neo4jIntegrator:
         """항암제 노드 생성"""
         print("\n[INFO] 항암제 노드 생성 중...")
 
-        drugs = drugs_data
+        # 중복된 ATC 코드 제거 (첫 번째 것만 유지)
+        seen_atc = set()
+        unique_drugs = []
+        duplicates = 0
+
+        for drug in drugs_data:
+            atc = drug['atc_code']
+            if atc not in seen_atc:
+                seen_atc.add(atc)
+                unique_drugs.append(drug)
+            else:
+                duplicates += 1
+
+        if duplicates > 0:
+            print(f"[WARN] 중복된 ATC 코드 {duplicates}개 제거됨")
+
+        drugs = unique_drugs
 
         cypher = """
         UNWIND $drugs AS drug
