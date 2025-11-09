@@ -27,9 +27,9 @@ BRIDGES_DIR = PROJECT_ROOT / "bridges"
 DATA_DIR = PROJECT_ROOT / "data" / "hins" / "parsed"
 
 INPUT_DRUGS = BRIDGES_DIR / "anticancer_master_classified.json"
-INPUT_BIOMARKERS = BRIDGES_DIR / "biomarkers_extracted.json"
+INPUT_BIOMARKERS = BRIDGES_DIR / "biomarkers_extracted_v2.json"  # v2.0: 23개 (v1.0: 17개)
 INPUT_TESTS = DATA_DIR / "biomarker_tests_structured.json"
-INPUT_MAPPINGS = BRIDGES_DIR / "biomarker_test_mappings.json"
+INPUT_MAPPINGS = BRIDGES_DIR / "biomarker_test_mappings_v2_code_based.json"  # 100% 코드 기반 매핑
 
 # .env 파일 로드
 load_dotenv(PROJECT_ROOT / ".env")
@@ -209,7 +209,9 @@ class Neo4jIntegrator:
         relationships = []
         for mapping in mappings:
             biomarker_id = mapping['biomarker_id']
-            for test in mapping['matched_tests']:
+            # v2.0 code-based mapping uses 'tests' instead of 'matched_tests'
+            tests_key = 'tests' if 'tests' in mapping else 'matched_tests'
+            for test in mapping[tests_key]:
                 relationships.append({
                     'biomarker_id': biomarker_id,
                     'test_id': test['test_id'],
